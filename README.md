@@ -1,4 +1,7 @@
-# Entrega1-IP2-AutoDrive 🚗
+# Entrega1-IP2-AutoDrive
+
+# AutoDrive 🚗
+
 Sistema para gerenciamento de concessionária, integrando vendas de veículos (novos e usados) e ordens de serviço da oficina.
 
 ## Integrantes
@@ -8,3 +11,9 @@ Sistema para gerenciamento de concessionária, integrando vendas de veículos (n
 
 ## Status
 Projeto em desenvolvimento.
+
+## Estrutura (inicial)
+- Cadastro de clientes
+- Cadastro de veículos
+- Vendas
+- Ordens de serviço

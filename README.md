@@ -6,6 +6,7 @@ Sistema para gerenciamento de concessionária, integrando vendas de veículos (n
 - Samuel Cely de Araujo 
 - Yuri Neves de Arruda Cabral 
 - Ótavio Santiago Wanderley de Mendonça
+- Artur Cândido
 
 ## Status
 Projeto em desenvolvimento.

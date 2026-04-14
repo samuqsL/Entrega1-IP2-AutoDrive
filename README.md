@@ -44,7 +44,7 @@ O sistema foca no ciclo de vida do veículo dentro da loja: desde a entrada no e
 - **iText** – Geração de OS.
   
 ## Integrantes
-- Samuel Cely de Araujo | samuelcely123@gmail.com
+- Samuel Cely de Araujo | samuel.cely@ufrpe.br
 - Yuri Neves de Arruda Cabral | yuri.cabral@ufrpe.br
-- Ótavio Santiago Wanderley de Mendonça | 
-- Artur Cândido |
+- Ótavio Santiago Wanderley de Mendonça | otavio.santiago@ufrpe.br
+- Artur Cândido Dourado do Nascimento | artur.candido@ufrpe.br

@@ -45,6 +45,6 @@ O sistema foca no ciclo de vida do veículo dentro da loja: desde a entrada no e
   
 ## Integrantes
 - Samuel Cely de Araujo | samuelcely123@gmail.com
-- Yuri Neves de Arruda Cabral | 
-- Ótavio Santiago Wanderley de Mendonça |
+- Yuri Neves de Arruda Cabral | yuri.cabral@ufrpe.br
+- Ótavio Santiago Wanderley de Mendonça | 
 - Artur Cândido |

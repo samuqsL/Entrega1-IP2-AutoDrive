@@ -34,6 +34,13 @@ Public class Cliente {
   public String setEmail(String email) {this.email = email;}
   public String setTelefone(String telefone) {this.telefone = telefone}
 
-  //Metodos
+  // ------ //
   
+  //Metodo 1 (atualizar informações do cliente, apenas atributos alteravéis)
+  public void atualizarCadastro(String nome, String cnh, String email, String telefone){
+    setNome(nome);
+    setCnh(cnh);
+    setEmail(email);
+    setTelefone(telefone);
+  }
 }

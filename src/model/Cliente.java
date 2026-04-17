@@ -21,8 +21,19 @@ Public class Cliente {
      this(nome, cpf, cnh, null, null);
    }
 
-  //getters
-  public void getNome() {return this.nome}
-  pu
+  //getters (pegar valor)
+  public void getNome() {return this.nome;}
+  public void getCpf() {return this.cpf;}
+  public void getCnh() {return this.cnh;}
+  public void getEmail() {return this.email;}
+  public void getTelefone() {return this.telefone;}
+  //setters (alterar valor)
+  public String setNome(String nome) {this.nome = nome;}
+  public String setCpf(String cpf) {this.cpf = cpf;}
+  public String setCnh(String cnh) {this.cnh = cnh;}
+  public String setEmail(String email) {this.email = email;}
+  public String setTelefone(String telefone) {this.telefone = telefone}
+
+  //Metodos
   
 }

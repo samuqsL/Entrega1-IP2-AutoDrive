@@ -5,7 +5,7 @@
 // [?] duvida
 // [A] aviso
 
-package projeto1;
+package model;
 
 //classe mae de "VeiculoNovo" e "VeiculoSeminovo"
 public class Veiculo {

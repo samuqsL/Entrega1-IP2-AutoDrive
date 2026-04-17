@@ -34,44 +34,24 @@ public Veiculo(String chassi, String renavam, String modelo, int ano) {
 }
 
     //getters e setters
-	public String getChassi() {
-		return chassi;
-	}
+	public String getChassi() {return chassi;}
 
-	public void setChassi(String chassi) {
-		this.chassi = chassi;
-	}
+	public void setChassi(String chassi) {this.chassi = chassi;}
 
-	public String getRenavam() {
-		return renavam;
-	}
+	public String getRenavam() {return renavam;}
 
-	public void setRenavam(String renavam) {
-		this.renavam = renavam;
-	}
+	public void setRenavam(String renavam) {this.renavam = renavam;}
 
-	public String getModelo() {
-		return modelo;
-	}
+	public String getModelo() {return modelo;}
 
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
+	public void setModelo(String modelo) {this.modelo = modelo;}
 
-	public int getAno() {
-		return ano;
-	}
+	public int getAno() {return ano;}
 
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
+	public void setAno(int ano) {this.ano = ano;}
 
-	public StatusVeiculo getStatus() {
-		return status;
-	}
+	public StatusVeiculo getStatus() {return status;}
 
-	public void setStatus(StatusVeiculo status) {
-		this.status = status;
-	}
+	public void setStatus(StatusVeiculo status) {this.status = status;}
 
 }

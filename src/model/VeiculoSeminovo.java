@@ -13,10 +13,6 @@ public VeiculoSeminovo(String chassi, String renavam, String modelo, int ano, do
 	}
 
 //getters e setters
-public double getQuilometragem() {
-return quilometragem;
-    }
-public void setQuilometragem(double quilometragem) {
-	this.quilometragem = quilometragem;
-    }
+public double getQuilometragem() {return quilometragem;}
+public void setQuilometragem(double quilometragem) {this.quilometragem = quilometragem;}
 }

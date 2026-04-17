@@ -30,6 +30,7 @@ public Veiculo(String chassi, String renavam, String modelo, int ano) {
 	this.modelo = modelo;
 	this.ano = ano;
 	status = StatusVeiculo.ESTOQUE;
+	//esse construtor não tem "StatusVeiculo status" como parametro, pra deixar o status "ESTOQUE" como status padrão
 }
 
     //getters e setters

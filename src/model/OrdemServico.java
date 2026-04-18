@@ -18,10 +18,9 @@ public class OrdemServico {
         this.status = StatusOS.ABERTA;
     }
 
-    // REQ20
     public void adicionarServico(MaoDeObra maoDeObra) {
         if (!maoDeObra.getMecanico().isDisponivel()) {
-            throw new IllegalStateException("Mecânico indisponível!");
+            throw new IllegalStateException("Mecânico indisponível");
         }
         servicos.add(maoDeObra);
         maoDeObra.getMecanico().setDisponivel(false);
@@ -50,20 +49,32 @@ public class OrdemServico {
         this.status = StatusOS.PAGA;
     }
 
-    public void finalizarOS() {
+    public void finalizarOS(Cliente cliente, Veiculo veiculo) {
         if (status != StatusOS.PAGA) {
-            throw new IllegalStateException("OS só pode ser finalizada se estiver PAGA.");
+            throw new IllegalStateException("OS só pode ser finalizada se estiver PAGA");
         }
+
         this.status = StatusOS.FINALIZADA;
         this.dataFechamento = "hoje";
+
+        Relatorio relatorio = new Relatorio(null, this);
+        relatorio.emitirRelatorioOS();
+
+        Notificacao notificacao = new Notificacao(
+                veiculo.getQuilometragem(),
+                0,
+                "hoje",
+                cliente,
+                veiculo
+        );
+        notificacao.notificarCliente();
     }
 
-    // REQ18
     public void excluirOS() {
         if (!pecas.isEmpty()) {
-            throw new IllegalStateException("Não é possível excluir OS com peças já utilizadas.");
+            throw new IllegalStateException("Não é possível excluir OS com peças já utilizadas");
         }
-        System.out.println("OS excluída com sucesso.");
+        System.out.println("OS excluída com sucesso");
     }
 
     public double calcularBonusMecanico() {

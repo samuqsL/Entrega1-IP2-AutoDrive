@@ -7,9 +7,10 @@ public class Vendedor {
   private double percentualComissao;
   
   //construtor principal da classe!
-  public Vendedor(String nome, double comissao){
+  public Vendedor(String nome, double percentualComissao){
     this.nome = nome;
-    this.comissao = comissao;
+    this.percentualComissao = percentualComissao;
+    this.comissao = 0;
   }
 
   //getters (pegar valor)
@@ -21,9 +22,15 @@ public class Vendedor {
   
   public void setComissao(double comissao) {
     if (comissao < 0) {
-      throw new IllegalArgumentException(); //Impede que a comissão seja alterada para negativo!
+      throw new IllegalArgumentException("Comissão inválida"); //Impede que a comissão seja alterada para negativo!
     }
     this.comissao = comissao;  
+  }
+  public void setPercentualComissao(double percentualComissao){
+    if (percentualComissao < 0) {
+      throw new IllegalArgumentException("Percentual de comissao Inválido");
+    }
+    this.percentualComissao = percentualComissao;
   }
 
   //Metodos (...)

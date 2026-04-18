@@ -4,7 +4,8 @@ public class Vendedor {
 
   private String nome;
   private double comissao;
-
+  private double percentualComissao;
+  
   //construtor principal da classe!
   public Vendedor(String nome, double comissao){
     this.nome = nome;
@@ -14,6 +15,7 @@ public class Vendedor {
   //getters (pegar valor)
   public String getNome() {return this.nome;}
   public double getComissao() {return this.comissao;}
+  public double getPercentualComissao() {return this.percentualComissao;}
   //setters
   public void setNome(String nome) {this.nome = nome;}
   

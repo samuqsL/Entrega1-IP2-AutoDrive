@@ -1,4 +1,4 @@
-package model
+package model;
 
 public class Cliente {
 
@@ -32,7 +32,7 @@ public class Cliente {
   public void setCpf(String cpf) {this.cpf = cpf;}
   public void setCnh(String cnh) {this.cnh = cnh;}
   public void setEmail(String email) {this.email = email;}
-  public void setTelefone(String telefone) {this.telefone = telefone}
+  public void setTelefone(String telefone) {this.telefone = telefone;}
 
   // ------ //
   

@@ -22,17 +22,17 @@ public class Cliente {
    }
 
   //getters (pegar valor)
-  public void getNome() {return this.nome;}
-  public void getCpf() {return this.cpf;}
-  public void getCnh() {return this.cnh;}
-  public void getEmail() {return this.email;}
-  public void getTelefone() {return this.telefone;}
+  public String getNome() {return this.nome;}
+  public String getCpf() {return this.cpf;}
+  public String getCnh() {return this.cnh;}
+  public String getEmail() {return this.email;}
+  public String getTelefone() {return this.telefone;}
   //setters (alterar valor)
-  public String setNome(String nome) {this.nome = nome;}
-  public String setCpf(String cpf) {this.cpf = cpf;}
-  public String setCnh(String cnh) {this.cnh = cnh;}
-  public String setEmail(String email) {this.email = email;}
-  public String setTelefone(String telefone) {this.telefone = telefone}
+  public void setNome(String nome) {this.nome = nome;}
+  public void setCpf(String cpf) {this.cpf = cpf;}
+  public void setCnh(String cnh) {this.cnh = cnh;}
+  public void setEmail(String email) {this.email = email;}
+  public void setTelefone(String telefone) {this.telefone = telefone}
 
   // ------ //
   

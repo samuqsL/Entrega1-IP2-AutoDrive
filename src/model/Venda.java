@@ -39,54 +39,55 @@ public class Venda {
   public void setValorTotal(double valorTotal) {this.valorTotal = valorTotal;}
   public void setDataVenda(LocalDateTime dataVenda) {this.dataVenda = dataVenda;}
 
-  //Metodo 1 (realizar venda de veiculo) - [PRINCIPAL]
- public void realizarVenda() {
-
-    if (!cliente.validarCnhCliente()) {
-        System.out.println("Cliente sem CNH válida");
-        return; //encerrar metodo antes da hora, para impedir da venda (se CNH DO CLIENTE for INVÁLIDA)
-    }
-
-    if (veiculo.getStatus() == StatusVeiculo.VENDIDO) {
-        System.out.println("Veículo já vendido");
-        return; //encerrar metodo antes da hora, para impedir da venda (se tiver VENDIDO)!
-    }
+ //Metodo 1 (realizar venda de veiculo) - [PRINCIPAL]
+  public void realizarVenda() {
+  
+      if (!cliente.validarCnhCliente()) {
+          System.out.println("Cliente sem CNH válida");
+          return; //encerrar metodo antes da hora, para impedir da venda (se CNH DO CLIENTE for INVÁLIDA)
+      }
+  
+      if (veiculo.getStatus() == StatusVeiculo.VENDIDO) {
+          System.out.println("Veículo já vendido");
+          return; //encerrar metodo antes da hora, para impedir da venda (se tiver VENDIDO)!
+      }
+      
+      if (veiculo.getStatus() == StatusVeiculo.RESERVADO){
+        System.out.println("Veiculo já reservado");
+        return; //encerrar metodo antes da hora, para impedir da venda (SE tiver RESERVADO)!
+      }
+     
+      if (veiculo.getRenavam() == null || veiculo.getRenavam().isEmpty()){
+        System.out.println("Veículo com pendência de Documentação!");
+        return; //encerrar metodo antes da hora, para impedir da venda (SE RENAVAM tiver VAZIO)!
+      }
+      if (entrada < ENTRADA_MINIMA) {
+        System.out.println("Entrada inferior ao mínimo");
+        return; //encerrar metodo antes da hora, para impedir da venda (SE ENTRADA < ENTRADA MINIMA)
+      }
+  
+      double precoBase = veiculo.getPreco(); // Variavel local do metodo realizarVenda(), o "precoBase" é o preco do veiculo da venda!
+      double imposto = calcularImposto(precoBase); // variavel local do metodo realizaVenda(), o "imposto" da venda = *calculoImposto()* (chamada do metodo)
+      double comissao = calcularComissao(precoBase); // variavel local do metodo realizaVenda(), a "comissao" = *preçoBase * PercentualComissao(do vendedor)!
+  
+      this.valorTotal = precoBase + imposto; //Inicializa o atributo "ValorTotal" da venda = *precoBase + imposto*
+     
+      this.dataVenda = LocalDateTime.now(); //inicializa o atributo: "dataVenda" da venda = *data atual*
+      veiculo.setStatus(StatusVeiculo.VENDIDO); // SE todas as condicões forem atendidas ENTAO veiculo é dado como *VENDIDO*
+      
+      vendedor.setComissao(vendedor.getComissao() + comissao); //alterar atributo comissão pro vendedor (PÓS VENDA)!
     
-    if (veiculo.getStatus() == StatusVeiculo.RESERVADO){
-      System.out.println("Veiculo já reservado");
-      return; //encerrar metodo antes da hora, para impedir da venda (SE tiver RESERVADO)!
-    }
-   
-    if (veiculo.getRenavam() == null || veiculo.getRenavam().isEmpty()){
-      System.out.println("Veículo com pendência de Documentação!");
-      return; //encerrar metodo antes da hora, para impedir da venda (SE RENAVAM tiver VAZIO)!
-    }
-    if (entrada < ENTRADA_MINIMA) {
-      System.out.println("Entrada inferior ao mínimo");
-      return; //encerrar metodo antes da hora, para impedir da venda (SE ENTRADA < ENTRADA MINIMA)
-    }
-   
-    this.valorTotal = veiculo.getPreco(); //inicializa o atributo: "valorTotal" da venda = *"preco" do Veiculo*
-    this.dataVenda = LocalDateTime.now(); //inicializa o atributo: "dataVenda" da venda = *data atual*
-
-    veiculo.setStatus(StatusVeiculo.VENDIDO); // SE todas as condicões forem atendidas ENTAO veiculo é dado como *VENDIDO*
-
-    double imposto = calcularImposto();
-    double comissao = calcularComissao();
-   
-    vendedor.setComissao(vendedor.getComissao() + comissao); //alterar atributo comissão pro vendedor (PÓS VENDA)!
-
-    System.out.println("Venda realizada");
-    System.out.println("Imposto: " + imposto);
-    System.out.println("Comissão: " + comissao);
-}
+      System.out.println("Venda realizada");
+      System.out.println("Imposto: " + imposto);
+      System.out.println("Comissão: " + comissao);
+  }
   
   //Metodo 2 (Calcular Comissao)
-  public double calcularComissao() {
-    return this.valorTotal * vendedor.getPercentualComissao();
-}
+  public double calcularComissao(double precoBase) {
+    return precoBase * vendedor.getPercentualComissao();
+  }
   //Metodo 3 (CalcularImposto)
-  public double calcularImposto() {
-    return this.valorTotal * TAXA_IMPOSTO;
+  public double calcularImposto(double precoBase) {
+    return precoBase * TAXA_IMPOSTO;
   }
 }

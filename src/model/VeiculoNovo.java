@@ -1,4 +1,4 @@
-package model
+package model;
 //classe filha de "Veiculos"
 public class VeiculoNovo extends Veiculo {
 	//construtor

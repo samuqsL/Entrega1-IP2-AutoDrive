@@ -9,12 +9,12 @@ public class TestDrive {
 
     if (!cliente.verificarCnhCliente()) {
       System.out.println("CNH inválida");
-      return;
+      return; //encerrar metodo antes da hora, para impedir agendamento (SE CNH é INVÁLIDO)
     }
 
     if (veiculo.getStatus() == Status.EM_MANUTENCAO) {
       System.out.println("Veículo indisponível");
-      return;
+      return; //encerrar metodo antes da hora, para impedir agendamento (SE StatusVeiculo == EM_MANUTENCAO)
     }
 
     veiculo.setStatus(Status.TEST_DRIVE);

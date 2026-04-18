@@ -18,7 +18,7 @@ public class Veiculo {
 	private StatusVeiculo status;
 	
 	//construtores
-	public Veiculo(String chassi, String renavam, String modelo, int ano, StatusVeiculo status) {
+	public Veiculo(String chassi, String renavam, String modelo, int ano, double preco, StatusVeiculo status) {
 		this.chassi = chassi;
 		this.renavam = renavam;
 		this.modelo = modelo;
@@ -49,7 +49,7 @@ public class Veiculo {
 	public void setAno(int ano) {this.ano = ano;}
 
 	public double getPreco() {return preco;}
-	public void setPreco() {this.preco = preco;}
+	public void setPreco(double preco) {this.preco = preco;}
 
 	public StatusVeiculo getStatus() {return status;}
 	public void setStatus(StatusVeiculo status) {this.status = status;}

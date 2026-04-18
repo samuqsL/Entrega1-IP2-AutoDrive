@@ -43,4 +43,7 @@ public class Cliente {
     setEmail(email);
     setTelefone(telefone);
   }
+  public boolean validarCnhCliente() {
+    return this.cnh != null && !this.cnh.isEmpty();
+}
 }

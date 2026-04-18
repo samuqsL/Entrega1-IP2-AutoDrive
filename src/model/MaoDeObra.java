@@ -15,7 +15,35 @@ public class MaoDeObra {
         return valor * horas;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public double getHoras() {
+        return horas;
+    }
+
+    public void setHoras(double horas) {
+        this.horas = horas;
+    }
+
     public Mecanico getMecanico() {
         return mecanico;
+    }
+
+    public void setMecanico(Mecanico mecanico) {
+        this.mecanico = mecanico;
     }
 }

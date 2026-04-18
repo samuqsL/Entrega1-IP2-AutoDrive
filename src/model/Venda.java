@@ -23,7 +23,7 @@ public class Venda {
   }
   //Contrutor 2 (Overloading[sem entrada]) - Se "entrada" não for especificada ela inicia com "0"!
   public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo){
-    this(cliente, vendedor, veiculo, 0)
+    this(cliente, vendedor, veiculo, 0);
   }
   
   //getters (pegar valor)

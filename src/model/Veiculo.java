@@ -20,6 +20,10 @@ public class Veiculo {
 	
 	//construtores principal
 	public Veiculo(String chassi, String renavam, String modelo, int ano, double preco, double quilometragem ,StatusVeiculo status) {
+		//vê se o "preco" não é menor ou igual a zero! (SE é ENTÃO impede instanciar objeto Veiculo)
+		if (preco <= 0) {
+        	throw new IllegalArgumentException("Preço deve ser maior que zero");
+    	}
 		this.chassi = chassi;
 		this.renavam = renavam;
 		this.modelo = modelo;
@@ -48,7 +52,12 @@ public class Veiculo {
 	public void setAno(int ano) {this.ano = ano;}
 
 	public double getPreco() {return preco;}
-	public void setPreco(double preco) {this.preco = preco;}
+	public void setPreco(double preco) {
+		if (preco <= 0) {
+        	throw new IllegalArgumentException("Preço deve ser maior que zero");
+    	}	
+		this.preco = preco;
+	}
 
 	public double getQuilometragem() {return quilometragem;}
 	public void setQuilometragem(double quilometragem) {this.quilometragem = quilometragem;}

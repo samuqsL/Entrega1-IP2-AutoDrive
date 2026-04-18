@@ -8,12 +8,13 @@ public class Venda {
   private Vendedor vendedor;
   private Veiculo veiculo;
   private double valorTotal;
+  private double entrada;
   private LocalDateTime dataVenda;
 
   private static final double TAXA_IMPOSTO = 0.10; //Variavel compartilhada por todas as classes (static) | variavel constate fixa (final)
-
+  private static final double ENTRADA_MINIMA = 5000.0; // Variavel constate fixa e compatilhada de ENTRADA MINIMa da VENDA!
   //Construtor Principal
-  public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo){
+  public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo, double entrada){
     //valor total não é inicializado no construtor!
     this.cliente = cliente;
     this.vendedor = vendedor;
@@ -50,7 +51,16 @@ public class Venda {
       System.out.println("Veiculo já reservado");
       return; //encerrar metodo antes da hora, para impedir da venda (SE tiver RESERVADO)!
     }
-
+   
+    if (veiculo.getRenavam() == null || veiculo.getRenavam().isEmpty()){
+      System.out.println("Veículo com pendência de Documentação!");
+      return; //encerrar metodo antes da hora, para impedir da venda (SE RENAVAM tiver VAZIO)!
+    }
+    if (entrada < ENTRADA_MINIMA) {
+      System.out.println("Entrada inferior ao mínimo");
+      return; //encerrar metodo antes da hora, para impedir da venda (SE ENTRADA < ENTRADA MINIMA)
+    }
+   
     this.valorTotal = veiculo.getPreco();
     this.dataVenda = LocalDateTime.now();
 

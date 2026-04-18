@@ -3,10 +3,6 @@ import java.util.List;
 
 public class OrdemServico {
 
-    public enum StatusOS {
-        ABERTA, PAGA, FINALIZADA
-    }
-
     private int numero;
     private StatusOS status;
     private String dataAbertura;
@@ -22,13 +18,13 @@ public class OrdemServico {
         this.status = StatusOS.ABERTA;
     }
 
-    // REQ20: validar mecânico disponível antes de adicionar serviço
+    // REQ20
     public void adicionarServico(MaoDeObra maoDeObra) {
         if (!maoDeObra.getMecanico().isDisponivel()) {
             throw new IllegalStateException("Mecânico indisponível!");
         }
         servicos.add(maoDeObra);
-        maoDeObra.getMecanico().setDisponivel(false); // ocupa o mecânico
+        maoDeObra.getMecanico().setDisponivel(false);
     }
 
     public void adicionarPeca(Pecas peca) {
@@ -59,10 +55,10 @@ public class OrdemServico {
             throw new IllegalStateException("OS só pode ser finalizada se estiver PAGA.");
         }
         this.status = StatusOS.FINALIZADA;
-        this.dataFechamento = "hoje"; // simplificado
+        this.dataFechamento = "hoje";
     }
 
-    // REQ18: bloquear exclusão se houver peças
+    // REQ18
     public void excluirOS() {
         if (!pecas.isEmpty()) {
             throw new IllegalStateException("Não é possível excluir OS com peças já utilizadas.");
@@ -70,7 +66,6 @@ public class OrdemServico {
         System.out.println("OS excluída com sucesso.");
     }
 
-    // bônus do mecânico
     public double calcularBonusMecanico() {
         double bonusTotal = 0;
         for (MaoDeObra m : servicos) {

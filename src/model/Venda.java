@@ -1,21 +1,21 @@
 package model;
 
-import java.util.LocalDateTime;
+import java.time.LocalDateTime;
   
 public class Venda {
   //Atributos
   private Cliente cliente;
   private Vendedor vendedor;
   private Veiculo veiculo;
-  private double valorTotal;
+  private double valorTotal; // Atribuido aqui
   private LocalDateTime dataVenda;
 
   //Construtor Principal
-  public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo, double valorTotal, LocalDateTime dataVenda){
+  public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo, LocalDateTime dataVenda){
+    //valor total não é inicializado no construtor!
     this.cliente = cliente;
     this.vendedor = vendedor;
     this.veiculo = veiculo;
-    this.valorTotal = valorTotal;
     this.dataVenda = dataVenda;
   }
 
@@ -32,6 +32,16 @@ public class Venda {
   public void setValorTotal(double valorTotal) {this.valorTotal = valorTotal;}
   public void setDataVenda(LocalDateTime dataVenda) {this.dataVenda = dataVenda;}
 
-  public 
-  
+  //Metodo 1 (realizar venda de veiculo)
+  public void realizaVenda(){
+    this.valorTotal = veiculo.getpreco();
+    //A fazer...
+  }
+  //Metodo 2 (Calcular Comissao)
+  public double calcularComissao(){
+    //A fazer...
+  }
+  public double calcularImposto(){
+    //A fazer...
+  }
 }

@@ -1,4 +1,4 @@
-package projeto1;
+package model;
 
 //classe filha de "Veiculo"
 public class VeiculoSeminovo extends Veiculo {
@@ -8,8 +8,11 @@ public class VeiculoSeminovo extends Veiculo {
 	
 	//construtor
 	public VeiculoSeminovo(String chassi, String renavam, String modelo, int ano, double quilometragem) {
-			super(chassi, renavam, modelo, ano);
-			this.quilometragem = quilometragem;
+		super(chassi, renavam, modelo, ano);
+		if (quilometragem <= 0) {
+            throw new IllegalArgumentException("Seminovo precisa de quilometragem inicial");
+        }
+		setQuilometragem(quilometragem)
 	}
 
 	//getters e setters

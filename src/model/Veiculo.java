@@ -25,7 +25,7 @@ public class Veiculo {
 		this.modelo = modelo;
 		this.ano = ano;
 		this.preco = preco;
-		this.quilometragem;
+		this.quilometragem = quilometragem;
 		this.status = status;
 	}
 	//construtor 2 (status padrão = ESTOQUE)

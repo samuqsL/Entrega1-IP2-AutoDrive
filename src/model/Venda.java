@@ -41,7 +41,7 @@ public class Venda {
         return;
     }
 
-    if (veiculo.getStatus() == Status.VENDIDO) {
+    if (veiculo.getStatus() == StatusVeiculo.VENDIDO) {
         System.out.println("Veículo já vendido");
         return;
     }
@@ -49,7 +49,7 @@ public class Venda {
     this.valorTotal = veiculo.getPreco();
     this.dataVenda = LocalDateTime.now();
 
-    veiculo.setStatus(Status.VENDIDO);
+    veiculo.setStatus(StatusVeiculo.VENDIDO);
 
     double imposto = calcularImposto();
     double comissao = calcularComissao();

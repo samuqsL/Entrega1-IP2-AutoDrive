@@ -34,7 +34,7 @@ public class Venda {
 
   //Metodo 1 (realizar venda de veiculo)
   public void realizaVenda(){
-    this.valorTotal = veiculo.getpreco();
+    this.valorTotal = veiculo.getpreco(); //inicializar valorTotal no metodo!
     //A fazer...
   }
   //Metodo 2 (Calcular Comissao)

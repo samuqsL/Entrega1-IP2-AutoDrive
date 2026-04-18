@@ -15,10 +15,11 @@ public class Veiculo {
 	private String modelo;
 	private int ano;
 	private double preco;
+	private double quilometragem;
 	private StatusVeiculo status;
 	
 	//construtores
-	public Veiculo(String chassi, String renavam, String modelo, int ano, double preco, StatusVeiculo status) {
+	public Veiculo(String chassi, String renavam, String modelo, int ano, double preco, double quilometragem ,StatusVeiculo status) {
 		this.chassi = chassi;
 		this.renavam = renavam;
 		this.modelo = modelo;
@@ -50,6 +51,9 @@ public class Veiculo {
 
 	public double getPreco() {return preco;}
 	public void setPreco(double preco) {this.preco = preco;}
+
+	public double getQuilometragem() {return quilometragem;}
+	public void setQuilometragem(double quilometragem) {this.quilometragem = quilometragem;}
 
 	public StatusVeiculo getStatus() {return status;}
 	public void setStatus(StatusVeiculo status) {this.status = status;}

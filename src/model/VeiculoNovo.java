@@ -3,6 +3,6 @@ package model;
 public class VeiculoNovo extends Veiculo {
 	//construtor
 	public VeiculoNovo(String chassi, String renavam, String modelo, int ano, double preco) {
-			super(chassi, renavam, modelo, ano, preco, 0);
+			super(chassi, renavam, modelo, ano, preco, 0.0);
 	}
 }

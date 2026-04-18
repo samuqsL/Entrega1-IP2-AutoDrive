@@ -10,6 +10,6 @@ public class VeiculoSeminovo extends Veiculo {
 		if (quilometragem <= 0) {
             throw new IllegalArgumentException("Seminovo precisa de quilometragem inicial");
         }
-		setQuilometragem(quilometragem)
+		setQuilometragem(quilometragem);
 	}
 }

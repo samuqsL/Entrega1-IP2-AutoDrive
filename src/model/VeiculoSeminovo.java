@@ -2,20 +2,14 @@ package model;
 
 //classe filha de "Veiculo"
 public class VeiculoSeminovo extends Veiculo {
-	//atributos
-	private double quilometragem;
-  //não permitir cadastro de seminovos sem registro de quilometragem inicial [A] [!!]
+	//atributos [são herdados da classe Veiculo]!
 	
-	//construtor
-	public VeiculoSeminovo(String chassi, String renavam, String modelo, int ano, double quilometragem) {
-		super(chassi, renavam, modelo, ano);
+	//construtor principal
+	public VeiculoSeminovo(String chassi, String renavam, String modelo, int ano, double preco, StatusVeiculo status, double quilometragem) {
+		super(chassi, renavam, modelo, ano, preco, status.ESTOQUE);
 		if (quilometragem <= 0) {
             throw new IllegalArgumentException("Seminovo precisa de quilometragem inicial");
         }
 		setQuilometragem(quilometragem)
 	}
-
-	//getters e setters
-	public double getQuilometragem() {return quilometragem;}
-	public void setQuilometragem(double quilometragem) {this.quilometragem = quilometragem;}
 }

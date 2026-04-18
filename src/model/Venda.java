@@ -13,14 +13,19 @@ public class Venda {
 
   private static final double TAXA_IMPOSTO = 0.10; //Variavel compartilhada por todas as classes (static) | variavel constate fixa (final)
   private static final double ENTRADA_MINIMA = 5000.0; // Variavel constate fixa e compatilhada de ENTRADA MINIMa da VENDA!
-  //Construtor Principal
+  
+  //Construtor 1 [Principal]
   public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo, double entrada){
     //valor total não é inicializado no construtor!
     this.cliente = cliente;
     this.vendedor = vendedor;
     this.veiculo = veiculo;
   }
-
+  //Contrutor 2 (Overloading[sem entrada]) - Se "entrada" não for especificada ela inicia com "0"!
+  public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo){
+    this(cliente, vendedor, veiculo, 0)
+  }
+  
   //getters (pegar valor)
   public Cliente getCliente() {return this.cliente;}
   public Vendedor getVendedor() {return this.vendedor;}
@@ -61,10 +66,10 @@ public class Venda {
       return; //encerrar metodo antes da hora, para impedir da venda (SE ENTRADA < ENTRADA MINIMA)
     }
    
-    this.valorTotal = veiculo.getPreco();
-    this.dataVenda = LocalDateTime.now();
+    this.valorTotal = veiculo.getPreco(); //inicializa o atributo: "valorTotal" da venda = *"preco" do Veiculo*
+    this.dataVenda = LocalDateTime.now(); //inicializa o atributo: "dataVenda" da venda = *data atual*
 
-    veiculo.setStatus(StatusVeiculo.VENDIDO);
+    veiculo.setStatus(StatusVeiculo.VENDIDO); // SE todas as condicões forem atendidas ENTAO veiculo é dado como *VENDIDO*
 
     double imposto = calcularImposto();
     double comissao = calcularComissao();

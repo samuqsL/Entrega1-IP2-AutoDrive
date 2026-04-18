@@ -84,4 +84,60 @@ public class OrdemServico {
         }
         return bonusTotal;
     }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public StatusOS getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusOS status) {
+        this.status = status;
+    }
+
+    public String getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public void setDataAbertura(String dataAbertura) {
+        this.dataAbertura = dataAbertura;
+    }
+
+    public String getDataFechamento() {
+        return dataFechamento;
+    }
+
+    public void setDataFechamento(String dataFechamento) {
+        this.dataFechamento = dataFechamento;
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public List<Pecas> getPecas() {
+        return pecas;
+    }
+
+    public void setPecas(List<Pecas> pecas) {
+        this.pecas = pecas;
+    }
+
+    public List<MaoDeObra> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(List<MaoDeObra> servicos) {
+        this.servicos = servicos;
+    }
 }

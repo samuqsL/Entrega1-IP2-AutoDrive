@@ -9,15 +9,27 @@ public class Mecanico {
         this.disponivel = disponivel;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
+    }
+
     public boolean isDisponivel() {
         return disponivel;
     }
 
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
-    }
-
-    public double getBonus() {
-        return bonus;
     }
 }

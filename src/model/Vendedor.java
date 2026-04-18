@@ -1,3 +1,5 @@
+package model
+
 public class Vendedor {
 
   private String nome;

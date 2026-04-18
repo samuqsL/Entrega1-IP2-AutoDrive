@@ -10,6 +10,8 @@ public class Venda {
   private double valorTotal;
   private LocalDateTime dataVenda;
 
+  private static final double TAXA_IMPOSTO = 0.10; //Variavel compartilhada por todas as classes (static) | variavel constate fixa (final)
+
   //Construtor Principal
   public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo){
     //valor total não é inicializado no construtor!
@@ -34,16 +36,21 @@ public class Venda {
   //Metodo 1 (realizar venda de veiculo) - [PRINCIPAL]
  public void realizarVenda() {
 
-    if (veiculo.getStatus() == Status.RESERVADO) {
-        System.out.println("Veículo reservado");
+    if (!cliente.validarCnhCliente()) {
+        System.out.println("Cliente sem CNH válida");
         return;
     }
 
-    this.valorTotal = veiculo.getPreco(); //inicializar o valorTotal" quando realizaVenda()!
+    if (veiculo.getStatus() == Status.VENDIDO) {
+        System.out.println("Veículo já vendido");
+        return;
+    }
+
+    this.valorTotal = veiculo.getPreco();
     this.dataVenda = LocalDateTime.now();
-    
+
     veiculo.setStatus(Status.VENDIDO);
-   
+
     double imposto = calcularImposto();
     double comissao = calcularComissao();
 
@@ -51,11 +58,13 @@ public class Venda {
     System.out.println("Imposto: " + imposto);
     System.out.println("Comissão: " + comissao);
 }
+  
   //Metodo 2 (Calcular Comissao)
-  public double calcularComissao(){
-    //A fazer...
-  }
-  public double calcularImposto(){
-    //A fazer...
+  public double calcularComissao() {
+    return this.valorTotal * vendedor.getPercentualComissao();
+}
+  //Metodo 3 (CalcularImposto)
+  public double calcularImposto() {
+    return this.valorTotal * TAXA_IMPOSTO;
   }
 }

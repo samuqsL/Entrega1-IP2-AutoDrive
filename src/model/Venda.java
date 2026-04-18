@@ -11,12 +11,11 @@ public class Venda {
   private LocalDateTime dataVenda;
 
   //Construtor Principal
-  public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo, LocalDateTime dataVenda){
+  public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo){
     //valor total não é inicializado no construtor!
     this.cliente = cliente;
     this.vendedor = vendedor;
     this.veiculo = veiculo;
-    this.dataVenda = dataVenda;
   }
 
   //getters (pegar valor)
@@ -32,11 +31,26 @@ public class Venda {
   public void setValorTotal(double valorTotal) {this.valorTotal = valorTotal;}
   public void setDataVenda(LocalDateTime dataVenda) {this.dataVenda = dataVenda;}
 
-  //Metodo 1 (realizar venda de veiculo)
-  public void realizaVenda(){
-    this.valorTotal = veiculo.getpreco(); //inicializar valorTotal no metodo!
-    //A fazer...
-  }
+  //Metodo 1 (realizar venda de veiculo) - [PRINCIPAL]
+ public void realizarVenda() {
+
+    if (veiculo.getStatus() == Status.RESERVADO) {
+        System.out.println("Veículo reservado");
+        return;
+    }
+
+    this.valorTotal = veiculo.getPreco(); //inicializar o valorTotal" quando realizaVenda()!
+    this.dataVenda = LocalDateTime.now();
+    
+    veiculo.setStatus(Status.VENDIDO);
+   
+    double imposto = calcularImposto();
+    double comissao = calcularComissao();
+
+    System.out.println("Venda realizada");
+    System.out.println("Imposto: " + imposto);
+    System.out.println("Comissão: " + comissao);
+}
   //Metodo 2 (Calcular Comissao)
   public double calcularComissao(){
     //A fazer...

@@ -21,7 +21,7 @@ public class Vendedor {
   
   public void setComissao(double comissao) {
     if (comissao < 0) {
-      throw new IllegalArgumentException; //Impede que a comissão seja alterada para negativo!
+      throw new IllegalArgumentException(); //Impede que a comissão seja alterada para negativo!
     }
     this.comissao = comissao;  
   }

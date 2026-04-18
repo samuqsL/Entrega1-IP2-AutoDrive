@@ -7,7 +7,7 @@ public class Venda {
   private Cliente cliente;
   private Vendedor vendedor;
   private Veiculo veiculo;
-  private double valorTotal; // Atribuido aqui
+  private double valorTotal;
   private LocalDateTime dataVenda;
 
   //Construtor Principal

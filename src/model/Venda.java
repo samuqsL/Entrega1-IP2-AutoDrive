@@ -54,6 +54,9 @@ public class Venda {
     double imposto = calcularImposto();
     double comissao = calcularComissao();
 
+    double comissao = calcularComissao();
+    vendedor.setComissao(vendedor.getComissao() + comissao);
+
     System.out.println("Venda realizada");
     System.out.println("Imposto: " + imposto);
     System.out.println("Comissão: " + comissao);

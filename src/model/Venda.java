@@ -38,12 +38,17 @@ public class Venda {
 
     if (!cliente.validarCnhCliente()) {
         System.out.println("Cliente sem CNH válida");
-        return;
+        return; //encerrar metodo antes da hora, para impedir da venda (se CNH DO CLIENTE for INVÁLIDA)
     }
 
     if (veiculo.getStatus() == StatusVeiculo.VENDIDO) {
         System.out.println("Veículo já vendido");
-        return;
+        return; //encerrar metodo antes da hora, para impedir da venda (se tiver VENDIDO)!
+    }
+    
+    if (veiculo.getStatus() == StatusVeiculo.RESERVADO){
+      System.out.println("Veiculo já reservado");
+      return; //encerrar metodo antes da hora, para impedir da venda (SE tiver RESERVADO)!
     }
 
     this.valorTotal = veiculo.getPreco();
@@ -54,7 +59,7 @@ public class Venda {
     double imposto = calcularImposto();
     double comissao = calcularComissao();
    
-    vendedor.setComissao(vendedor.getComissao() + comissao); //alterar atributo comissão pro vendedor!
+    vendedor.setComissao(vendedor.getComissao() + comissao); //alterar atributo comissão pro vendedor (PÓS VENDA)!
 
     System.out.println("Venda realizada");
     System.out.println("Imposto: " + imposto);

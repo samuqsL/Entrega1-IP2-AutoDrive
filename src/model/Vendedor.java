@@ -16,7 +16,13 @@ public class Vendedor {
   public double getComissao() {return this.comissao;}
   //setters
   public void setNome(String nome) {this.nome = nome;}
-  public void setComissao(double comissao) {this.comissao = comissao;}
+  
+  public void setComissao(double comissao) {
+    if (comissao < 0) {
+      throw new IllegalArgumentException; //Impede que a comissão seja alterada para negativo!
+    }
+    this.comissao = comissao;  
+  }
 
   //Metodos (...)
 }

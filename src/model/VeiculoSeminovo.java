@@ -7,12 +7,12 @@ public class VeiculoSeminovo extends Veiculo {
   //não permitir cadastro de seminovos sem registro de quilometragem inicial [A] [!!]
 	
 	//construtor
-public VeiculoSeminovo(String chassi, String renavam, String modelo, int ano, double quilometragem) {
-		super(chassi, renavam, modelo, ano);
-		this.quilometragem = quilometragem;
+	public VeiculoSeminovo(String chassi, String renavam, String modelo, int ano, double quilometragem) {
+			super(chassi, renavam, modelo, ano);
+			this.quilometragem = quilometragem;
 	}
 
-//getters e setters
-public double getQuilometragem() {return quilometragem;}
-public void setQuilometragem(double quilometragem) {this.quilometragem = quilometragem;}
+	//getters e setters
+	public double getQuilometragem() {return quilometragem;}
+	public void setQuilometragem(double quilometragem) {this.quilometragem = quilometragem;}
 }

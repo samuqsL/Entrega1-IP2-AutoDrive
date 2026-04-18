@@ -18,21 +18,19 @@ public class Veiculo {
 	private double quilometragem;
 	private StatusVeiculo status;
 	
-	//construtores
+	//construtores principal
 	public Veiculo(String chassi, String renavam, String modelo, int ano, double preco, double quilometragem ,StatusVeiculo status) {
 		this.chassi = chassi;
 		this.renavam = renavam;
 		this.modelo = modelo;
 		this.ano = ano;
 		this.preco = preco;
+		this.quilometragem;
 		this.status = status;
 	}
-	public Veiculo(String chassi, String renavam, String modelo, int ano) {
-		this.chassi = chassi;
-		this.renavam = renavam;
-		this.modelo = modelo;
-		this.ano = ano;
-		status = StatusVeiculo.ESTOQUE;
+	//construtor 2 (status padrão = ESTOQUE)
+	public Veiculo(String chassi, String renavam, String modelo, int ano, double preco, double quilometragem) {
+		this(chassi, renavam, modelo, ano, preco, quilometragem, statusVeiculo.Estoque);
 		//esse construtor não tem "StatusVeiculo status" como parametro, pra deixar o status "ESTOQUE" como status padrão
 }
 

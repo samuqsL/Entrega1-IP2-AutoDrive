@@ -68,4 +68,8 @@ public class Veiculo {
 	public StatusVeiculo getStatus() {return status;}
 	public void setStatus(StatusVeiculo status) {this.status = status;}
 
+	//Metodos
+	public void reservar() {
+		this.status = statusVeiculo.RESERVADO;
+	}
 }

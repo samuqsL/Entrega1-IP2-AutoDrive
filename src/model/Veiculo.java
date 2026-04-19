@@ -37,7 +37,7 @@ public class Veiculo {
 	}
 	//construtor 2 (status padrão = ESTOQUE)
 	public Veiculo(String chassi, String renavam, String modelo, int ano, double preco, double quilometragem) {
-		this(chassi, renavam, modelo, ano, preco, quilometragem, statusVeiculo.ESTOQUE);
+		this(chassi, renavam, modelo, ano, preco, quilometragem, StatusVeiculo.ESTOQUE);
 		//esse construtor não tem "StatusVeiculo status" como parametro, pra deixar o status "ESTOQUE" como status padrão
 }
 

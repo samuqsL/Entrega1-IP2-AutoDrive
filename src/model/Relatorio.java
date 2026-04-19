@@ -69,25 +69,25 @@ public Relatorio(ArrayList<Venda> listaVendas, OrdemServico os) {
             System.out.println("OS Nº: " + os.getNumero() + " | Status: " + os.getStatus());
         }
     }
+    
     public void relatorioLucratividadeOficina() {
        double lucroPecas = 0;
        double totalServicos = 0;
 
-        for (OrdemServico os : listaOs) {
-            for (Pecas p : os.getPecas()) {
-                double lucroUnitario = p.getPreco() - p.getCustoRepasse();
-                lucroPecas += lucroUnitario * p.getQuantidade();
+       for (OrdemServico os : listaOs) {
+           for (Pecas p : os.getListaPecas()) {
+               lucroPecas += p.custoPecas();
+           }
+           
+           for (MaoDeObra m : os.getListaServicos()) {
+               totalServicos += m.calcularCusto();
             }
-            
-            for (MaoDeObra m : os.getServicos()) {
-                totalServicos += m.calcularCusto();
-            }
-        }
-
-        System.out.println("\n--- RELATÓRIO DE LUCRATIVIDADE DA OFICINA ---");
-        System.out.println("Lucro com Peças: R$ " + String.format("%.2f", lucroPecas));
-        System.out.println("Receita com Serviços: R$ " + String.format("%.2f", totalServicos));
-        System.out.println("Lucro Total Oficina: R$ " + String.format("%.2f", (lucroPecas + totalServicos)));
-        System.out.println("----------------------------------------------");
+       }
+        
+       System.out.println("\n--- RELATÓRIO DE LUCRATIVIDADE DA OFICINA ---");
+       System.out.println("Receita com Peças: R$ " + String.format("%.2f", lucroPecas));
+       System.out.println("Receita com Serviços: R$ " + String.format("%.2f", totalServicos));
+       System.out.println("Total da Oficina: R$ " + String.format("%.2f", (lucroPecas + totalServicos)));
+       System.out.println("----------------------------------------------");
     }
 }

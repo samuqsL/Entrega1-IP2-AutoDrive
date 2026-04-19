@@ -3,17 +3,17 @@ public class Pecas {
     private String codigo;
     private double preco;
     private int quantidade;
-    private double custoRepasse;
 
-    public Pecas(String nome, String codigo, double preco, int quantidade, double custoRepasse) {
+    public Pecas() {}
+
+    public Pecas(String nome, String codigo, double preco, int quantidade) {
         this.nome = nome;
         this.codigo = codigo;
         this.preco = preco;
         this.quantidade = quantidade;
-        this.custoRepasse = custoRepasse;
     }
 
-    public double calcularTotal() {
+    public double custoPecas() {
         return preco * quantidade;
     }
 
@@ -47,13 +47,5 @@ public class Pecas {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
-    }
-
-    public double getCustoRepasse() {
-        return custoRepasse;
-    }
-
-    public void setCustoRepasse(double custoRepasse) {
-        this.custoRepasse = custoRepasse;
     }
 }

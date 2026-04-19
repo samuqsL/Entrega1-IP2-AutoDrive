@@ -7,7 +7,7 @@ public class TestDrive {
 
   public void agendar() {
 
-    if (!cliente.verificarCnhCliente()) {
+    if (!cliente.validarCnhCliente()) {
       System.out.println("CNH inválida");
       return; //encerrar metodo antes da hora, para impedir agendamento (SE CNH é INVÁLIDO)
     }

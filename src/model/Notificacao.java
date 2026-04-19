@@ -15,11 +15,9 @@ public class Notificacao {
         this.veiculo = veiculo;
     }
 
+    // REQ10: revisão preventiva por km
     public boolean gerarAlerta() {
-        if (veiculo.getStatus() == StatusVeiculo.EM_MANUTENCAO) {
-            return true;
-        }
-        return false;
+        return quilometragem >= 10000;
     }
 
     public void notificarCliente() {
@@ -27,17 +25,17 @@ public class Notificacao {
         System.out.println("Erro: Falha ao enviar notificação. Dados incompletos.");
         return;
         }
+
+        // Chamada do metodo "gerarAlerta()", e aplica validação (SE quilometragem >= 10000 retornar *False*, ENTAO encerra metodo [pois não precisa notificar!])
+        if (!gerarAlerta()) {
+            return;
+        }
         
         System.out.println("ENVIANDO NOTIFICAÇÃO...");
         System.out.println("Para: " + cliente.getNome());
-        System.out.println("Assunto: Status do seu veículo " + veiculo.getModelo());
+        System.out.println("Assunto: Revisão preventiva do seu veículo " + veiculo.getModelo());
         System.out.println("Data: " + this.data + " | KM: " + this.quilometragem);
-        System.out.println("Mensagem: O status atual é: " + veiculo.getStatus());
-
-        
-        if (this.quilometragem % 10000 == 0 && this.quilometragem > 0) {
-           System.out.println("ALERTA: Seu veículo atingiu um novo ciclo de 10.000km. Agende sua revisão!");
-        }
+        System.out.println("Mensagem: Seu veículo atingiu a quilometragem para revisão preventiva.");
 
     }
 }

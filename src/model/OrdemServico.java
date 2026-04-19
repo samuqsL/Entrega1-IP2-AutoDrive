@@ -8,6 +8,9 @@ public class OrdemServico {
     private String dataFechamento;
     private Double valorTotal;
 
+    private Cliente cliente;
+    private Veiculo veiculo;
+
     private List<Pecas> listaPecas;
     private List<MaoDeObra> listaServicos;
 
@@ -17,10 +20,32 @@ public class OrdemServico {
         this.status = StatusOS.ABERTA;
     }
 
-    public OrdemServico(int numero, String dataAbertura) {
+    // Construtor atualizado (REQ06)
+    public OrdemServico(int numero, String dataAbertura, Cliente cliente, Veiculo veiculo) {
         this();
         this.numero = numero;
         this.dataAbertura = dataAbertura;
+        this.cliente = cliente;
+        this.veiculo = veiculo;
+    }
+
+    // REQ07 – adicionar itens
+    public void adicionarPeca(Pecas peca, int quantidade) {
+        if (peca.retirarDoEstoque(quantidade)) {
+            Pecas item = new Pecas(
+                peca.getNome(),
+                peca.getCodigo(),
+                peca.getPreco(),
+                quantidade
+            );
+            listaPecas.add(item);
+        } else {
+            System.out.println("Estoque insuficiente para: " + peca.getNome());
+        }
+    }
+
+    public void adicionarServico(MaoDeObra servico) {
+        listaServicos.add(servico);
     }
 
     public Double calcularTotal() {
@@ -46,74 +71,35 @@ public class OrdemServico {
         if (status == StatusOS.PAGA) {
             this.status = StatusOS.FINALIZADA;
         } else {
-            System.out.println("Não é possível finalizar OS sem estar paga.");
+            System.out.println("OS precisa estar PAGA.");
         }
     }
 
-    // Métodos para integração com outras classes (Relatorio/Notificacao)
-    public void adicionarPeca(Pecas peca) {
-        listaPecas.add(peca);
-    }
-
-    public void adicionarServico(MaoDeObra servico) {
-        listaServicos.add(servico);
-    }
-
     // Getters e Setters
+    public int getNumero() { return numero; }
+    public void setNumero(int numero) { this.numero = numero; }
 
-    public int getNumero() {
-        return numero;
-    }
+    public StatusOS getStatus() { return status; }
+    public void setStatus(StatusOS status) { this.status = status; }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
+    public String getDataAbertura() { return dataAbertura; }
+    public void setDataAbertura(String dataAbertura) { this.dataAbertura = dataAbertura; }
 
-    public StatusOS getStatus() {
-        return status;
-    }
+    public String getDataFechamento() { return dataFechamento; }
+    public void setDataFechamento(String dataFechamento) { this.dataFechamento = dataFechamento; }
 
-    public void setStatus(StatusOS status) {
-        this.status = status;
-    }
+    public Double getValorTotal() { return valorTotal; }
+    public void setValorTotal(Double valorTotal) { this.valorTotal = valorTotal; }
 
-    public String getDataAbertura() {
-        return dataAbertura;
-    }
+    public Cliente getCliente() { return cliente; }
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
 
-    public void setDataAbertura(String dataAbertura) {
-        this.dataAbertura = dataAbertura;
-    }
+    public Veiculo getVeiculo() { return veiculo; }
+    public void setVeiculo(Veiculo veiculo) { this.veiculo = veiculo; }
 
-    public String getDataFechamento() {
-        return dataFechamento;
-    }
+    public List<Pecas> getListaPecas() { return listaPecas; }
+    public void setListaPecas(List<Pecas> listaPecas) { this.listaPecas = listaPecas; }
 
-    public void setDataFechamento(String dataFechamento) {
-        this.dataFechamento = dataFechamento;
-    }
-
-    public Double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public List<Pecas> getListaPecas() {
-        return listaPecas;
-    }
-
-    public void setListaPecas(List<Pecas> listaPecas) {
-        this.listaPecas = listaPecas;
-    }
-
-    public List<MaoDeObra> getListaServicos() {
-        return listaServicos;
-    }
-
-    public void setListaServicos(List<MaoDeObra> listaServicos) {
-        this.listaServicos = listaServicos;
-    }
+    public List<MaoDeObra> getListaServicos() { return listaServicos; }
+    public void setListaServicos(List<MaoDeObra> listaServicos) { this.listaServicos = listaServicos; }
 }

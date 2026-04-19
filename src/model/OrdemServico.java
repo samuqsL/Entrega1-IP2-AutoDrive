@@ -2,42 +2,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrdemServico {
-
     private int numero;
     private StatusOS status;
     private String dataAbertura;
     private String dataFechamento;
-    private double valorTotal;
+    private Double valorTotal;
 
-    private List<Pecas> pecas = new ArrayList<>();
-    private List<MaoDeObra> servicos = new ArrayList<>();
+    private List<Pecas> listaPecas;
+    private List<MaoDeObra> listaServicos;
 
-    public OrdemServico(int numero, String dataAbertura) {
-        this.numero = numero;
-        this.dataAbertura = dataAbertura;
+    public OrdemServico() {
+        this.listaPecas = new ArrayList<>();
+        this.listaServicos = new ArrayList<>();
         this.status = StatusOS.ABERTA;
     }
 
-    public void adicionarServico(MaoDeObra maoDeObra) {
-        if (!maoDeObra.getMecanico().isDisponivel()) {
-            throw new IllegalStateException("Mecânico indisponível");
-        }
-        servicos.add(maoDeObra);
-        maoDeObra.getMecanico().setDisponivel(false);
+    public OrdemServico(int numero, String dataAbertura) {
+        this();
+        this.numero = numero;
+        this.dataAbertura = dataAbertura;
     }
 
-    public void adicionarPeca(Pecas peca) {
-        pecas.add(peca);
-    }
-
-    public double calcularTotal() {
+    public Double calcularTotal() {
         double total = 0;
 
-        for (Pecas p : pecas) {
-            total += p.calcularTotal();
+        for (Pecas p : listaPecas) {
+            total += p.custoPecas();
         }
 
-        for (MaoDeObra m : servicos) {
+        for (MaoDeObra m : listaServicos) {
             total += m.calcularCusto();
         }
 
@@ -49,41 +42,24 @@ public class OrdemServico {
         this.status = StatusOS.PAGA;
     }
 
-    public void finalizarOS(Cliente cliente, Veiculo veiculo) {
-        if (status != StatusOS.PAGA) {
-            throw new IllegalStateException("OS só pode ser finalizada se estiver PAGA");
+    public void finalizarOS() {
+        if (status == StatusOS.PAGA) {
+            this.status = StatusOS.FINALIZADA;
+        } else {
+            System.out.println("Não é possível finalizar OS sem estar paga.");
         }
-
-        this.status = StatusOS.FINALIZADA;
-        this.dataFechamento = "hoje";
-
-        Relatorio relatorio = new Relatorio(null, this);
-        relatorio.emitirRelatorioOS();
-
-        Notificacao notificacao = new Notificacao(
-                veiculo.getQuilometragem(),
-                0,
-                "hoje",
-                cliente,
-                veiculo
-        );
-        notificacao.notificarCliente();
     }
 
-    public void excluirOS() {
-        if (!pecas.isEmpty()) {
-            throw new IllegalStateException("Não é possível excluir OS com peças já utilizadas");
-        }
-        System.out.println("OS excluída com sucesso");
+    // Métodos para integração com outras classes (Relatorio/Notificacao)
+    public void adicionarPeca(Pecas peca) {
+        listaPecas.add(peca);
     }
 
-    public double calcularBonusMecanico() {
-        double bonusTotal = 0;
-        for (MaoDeObra m : servicos) {
-            bonusTotal += m.getMecanico().getBonus();
-        }
-        return bonusTotal;
+    public void adicionarServico(MaoDeObra servico) {
+        listaServicos.add(servico);
     }
+
+    // Getters e Setters
 
     public int getNumero() {
         return numero;
@@ -117,27 +93,27 @@ public class OrdemServico {
         this.dataFechamento = dataFechamento;
     }
 
-    public double getValorTotal() {
+    public Double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(double valorTotal) {
+    public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-    public List<Pecas> getPecas() {
-        return pecas;
+    public List<Pecas> getListaPecas() {
+        return listaPecas;
     }
 
-    public void setPecas(List<Pecas> pecas) {
-        this.pecas = pecas;
+    public void setListaPecas(List<Pecas> listaPecas) {
+        this.listaPecas = listaPecas;
     }
 
-    public List<MaoDeObra> getServicos() {
-        return servicos;
+    public List<MaoDeObra> getListaServicos() {
+        return listaServicos;
     }
 
-    public void setServicos(List<MaoDeObra> servicos) {
-        this.servicos = servicos;
+    public void setListaServicos(List<MaoDeObra> listaServicos) {
+        this.listaServicos = listaServicos;
     }
 }

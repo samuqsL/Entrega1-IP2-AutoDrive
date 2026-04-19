@@ -4,6 +4,8 @@ public class MaoDeObra {
     private double horas;
     private Mecanico mecanico;
 
+    public MaoDeObra() {}
+
     public MaoDeObra(String descricao, double valor, double horas, Mecanico mecanico) {
         this.descricao = descricao;
         this.valor = valor;

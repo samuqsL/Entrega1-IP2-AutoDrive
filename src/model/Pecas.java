@@ -17,35 +17,29 @@ public class Pecas {
         return preco * quantidade;
     }
 
-    public String getNome() {
-        return nome;
+    // Controle de estoque
+    public boolean retirarDoEstoque(int qtd) {
+        if (qtd <= quantidade) {
+            quantidade -= qtd;
+            return true;
+        }
+        return false;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void adicionarEstoque(int qtd) {
+        quantidade += qtd;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
+    // Getters e Setters
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+    public String getCodigo() { return codigo; }
+    public void setCodigo(String codigo) { this.codigo = codigo; }
 
-    public double getPreco() {
-        return preco;
-    }
+    public double getPreco() { return preco; }
+    public void setPreco(double preco) { this.preco = preco; }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
+    public int getQuantidade() { return quantidade; }
+    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
 }

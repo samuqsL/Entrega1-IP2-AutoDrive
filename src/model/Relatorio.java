@@ -12,6 +12,15 @@ public class Relatorio {
         this.listaVendas = new ArrayList<>();
         this.listaOs = new ArrayList<>();
     }
+  
+public Relatorio(ArrayList<Venda> listaVendas, OrdemServico os) {
+    this.listaVendas = (listaVendas != null) ? listaVendas : new ArrayList<>();
+    this.listaOs = new ArrayList<>();
+    if (os != null) {
+        this.listaOs.add(os);
+    }
+}
+
 
     public void adicionarVenda(Venda venda) {
         this.listaVendas.add(venda);
@@ -53,7 +62,7 @@ public class Relatorio {
         }
     }
 
-    public void relatorioOficina() {
+    public void emitirRelatorioOS() {
         System.out.println("--- Relatório Geral da Oficina ---");
         for (OrdemServico os : listaOs) {
             System.out.println("OS Nº: " + os.getNumero() + " | Status: " + os.getStatus());

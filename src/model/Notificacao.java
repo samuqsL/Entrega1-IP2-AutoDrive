@@ -10,12 +10,16 @@ public class Notificacao {
     }
 
     public boolean gerarAlerta() {
-        return veiculo.getStatus() == StatusVeiculo.EM_MANUTENCAO;
+        if (veiculo.getStatus() == StatusVeiculo.EM_MANUTENCAO) {
+            return true;
+        }
+        return false;
     }
 
     public void notificarCliente() {
-        System.out.println("Aviso: Olá " + cliente.getNome() + 
-                           ", o status do seu veículo (" + veiculo.getModelo() + 
-                           ") foi atualizado para: " + veiculo.getStatus());
+        System.out.println("ENVIANDO NOTIFICAÇÃO...");
+        System.out.println("Para: " + cliente.getNome());
+        System.out.println("Assunto: Status do seu veículo " + veiculo.getModelo());
+        System.out.println("Mensagem: O status atual é: " + veiculo.getStatus());
     }
 }

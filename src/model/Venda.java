@@ -22,10 +22,6 @@ public class Venda {
     this.veiculo = veiculo;
     this.entrada = entrada;
   }
-  //Contrutor 2 (Overloading[sem entrada]) - Se "entrada" não for especificada ela inicia com "0"!
-  public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo){
-    this(cliente, vendedor, veiculo, 0);
-  }
   
   //getters (pegar valor)
   public Cliente getCliente() {return this.cliente;}
@@ -59,7 +55,12 @@ public class Venda {
         System.out.println("Veiculo já reservado");
         return; //encerrar metodo antes da hora, para impedir da venda (SE tiver RESERVADO)!
       }
-     
+
+      if (veiculo.getStatus() == StatusVeiculo.EM_MANUTENCAO){
+        System.out.println("Veiculo em manutenção");
+        return; //encerrar metodo antes da hora, para impedir da venda (SE tiver EM_MANUTENCAO)!
+      }
+    
       if (veiculo.getRenavam() == null || veiculo.getRenavam().isEmpty()){
         System.out.println("Veículo com pendência de Documentação!");
         return; //encerrar metodo antes da hora, para impedir da venda (SE RENAVAM tiver VAZIO)!

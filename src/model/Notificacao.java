@@ -33,5 +33,11 @@ public class Notificacao {
         System.out.println("Assunto: Status do seu veículo " + veiculo.getModelo());
         System.out.println("Data: " + this.data + " | KM: " + this.quilometragem);
         System.out.println("Mensagem: O status atual é: " + veiculo.getStatus());
+
+        
+        if (this.quilometragem % 10000 == 0 && this.quilometragem > 0) {
+           System.out.println("ALERTA: Seu veículo atingiu um novo ciclo de 10.000km. Agende sua revisão!");
+        }
+
     }
 }

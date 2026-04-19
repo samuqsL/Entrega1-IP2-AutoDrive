@@ -25,7 +25,7 @@ public class Veiculo {
         	throw new IllegalArgumentException("Preço deve ser maior que zero");
     	}
 		if (quilometragem < 0) {
-			throw new IllegalArgumentException("Quilometragem inválida")
+			throw new IllegalArgumentException("Quilometragem inválida");
 		}
 		this.chassi = chassi;
 		this.renavam = renavam;

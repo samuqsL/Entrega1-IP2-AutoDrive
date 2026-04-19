@@ -44,7 +44,12 @@ public class OrdemServico {
         }
     }
 
+    //REQ20
     public void adicionarServico(MaoDeObra servico) {
+        if (!servico.getMecanico().isDisponivel()) {
+            System.out.println("Mecânico indisponível.");
+            return;
+        }
         listaServicos.add(servico);
     }
 

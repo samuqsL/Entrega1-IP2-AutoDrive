@@ -20,7 +20,7 @@ public class Venda {
     this.cliente = cliente;
     this.vendedor = vendedor;
     this.veiculo = veiculo;
-    this.entrada = entrada;
+    setEntrada(entrada);
   }
   
   //getters (pegar valor)
@@ -36,7 +36,12 @@ public class Venda {
   public void setVeiculo(Veiculo veiculo) {this.veiculo = veiculo;}
   public void setValorTotal(double valorTotal) {this.valorTotal = valorTotal;}
   public void setDataVenda(LocalDateTime dataVenda) {this.dataVenda = dataVenda;}
-  public void setEntrada(double entrada) {this.entrada = entrada;}
+  public void setEntrada(double entrada) {
+    if (entrada < 0) {
+      throw new IllegalArgumentException("Entrada inválida");
+    }
+    this.entrada = entrada;
+  }
 
  //Metodo 1 (realizar venda de veiculo) - [PRINCIPAL]
   public void realizarVenda() {

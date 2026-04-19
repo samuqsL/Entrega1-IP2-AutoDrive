@@ -1,9 +1,11 @@
 public class Mecanico {
     private String nome;
-    private double bonus;
+    private Double bonus;
     private boolean disponivel;
 
-    public Mecanico(String nome, double bonus, boolean disponivel) {
+    public Mecanico() {}
+
+    public Mecanico(String nome, Double bonus, boolean disponivel) {
         this.nome = nome;
         this.bonus = bonus;
         this.disponivel = disponivel;
@@ -17,11 +19,11 @@ public class Mecanico {
         this.nome = nome;
     }
 
-    public double getBonus() {
+    public Double getBonus() {
         return bonus;
     }
 
-    public void setBonus(double bonus) {
+    public void setBonus(Double bonus) {
         this.bonus = bonus;
     }
 

@@ -4,20 +4,22 @@ public class Notificacao {
     private double quilometragem;
     private int revisaoNumero;
     private String data;
+    private int mesesUso;
     private Cliente cliente;
     private Veiculo veiculo;
 
-    public Notificacao(double quilometragem, int revisaoNumero, String data, Cliente cliente, Veiculo veiculo) {
+    public Notificacao(double quilometragem, int revisaoNumero, String data, int mesesUso, Cliente cliente, Veiculo veiculo) {
         this.quilometragem = quilometragem;
         this.revisaoNumero = revisaoNumero;
         this.data = data;
+        this.mesesUso = mesesUso;
         this.cliente = cliente;
         this.veiculo = veiculo;
     }
 
-    // REQ10: revisão preventiva por km
+    // REQ10: revisão preventiva por tempo/km
     public boolean gerarAlerta() {
-        return quilometragem >= 10000;
+        return quilometragem >= 10000 || mesesUso >= 12;
     }
 
     public void notificarCliente() {

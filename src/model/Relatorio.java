@@ -69,7 +69,7 @@ public Relatorio(ArrayList<Venda> listaVendas, OrdemServico os) {
             System.out.println("OS Nº: " + os.getNumero() + " | Status: " + os.getStatus());
         }
     }
-    public void relatorioLucratividade() {
+    public void relatorioLucratividadeOficina() {
        double lucroPecas = 0;
        double totalServicos = 0;
 

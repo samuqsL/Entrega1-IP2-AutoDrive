@@ -28,16 +28,17 @@ public class Notificacao {
         return;
         }
 
-        // Chamada do metodo "gerarAlerta()", e aplica validação (SE quilometragem >= 10000 retornar *False*, ENTAO encerra metodo [pois não precisa notificar!])
+        // Se não houver necessidade de revisão, encerra o método
         if (!gerarAlerta()) {
             return;
         }
         
         System.out.println("ENVIANDO NOTIFICAÇÃO...");
-        System.out.println("Para: " + cliente.getNome());
-        System.out.println("Assunto: Revisão preventiva do seu veículo " + veiculo.getModelo());
-        System.out.println("Data: " + this.data + " | KM: " + this.quilometragem);
-        System.out.println("Mensagem: Seu veículo atingiu a quilometragem para revisão preventiva.");
+        System.out.println("Cliente: " + cliente.getNome());
+        System.out.println("Veículo: " + veiculo.getModelo());
+        System.out.println("Data: " + data);
+        System.out.println("KM atual: " + quilometragem);
+        System.out.println("Mensagem: Revisão preventiva necessária.");
 
     }
 }

@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Relatorio {
     private ArrayList<Venda> listaVendas;
@@ -67,5 +68,26 @@ public Relatorio(ArrayList<Venda> listaVendas, OrdemServico os) {
         for (OrdemServico os : listaOs) {
             System.out.println("OS Nº: " + os.getNumero() + " | Status: " + os.getStatus());
         }
+    }
+    public void relatorioLucratividade() {
+       double lucroPecas = 0;
+       double totalServicos = 0;
+
+        for (OrdemServico os : listaOs) {
+            for (Pecas p : os.getPecas()) {
+                double lucroUnitario = p.getPreco() - p.getCustoRepasse();
+                lucroPecas += lucroUnitario * p.getQuantidade();
+            }
+            
+            for (MaoDeObra m : os.getServicos()) {
+                totalServicos += m.calcularCusto();
+            }
+        }
+
+        System.out.println("\n--- RELATÓRIO DE LUCRATIVIDADE DA OFICINA ---");
+        System.out.println("Lucro com Peças: R$ " + String.format("%.2f", lucroPecas));
+        System.out.println("Receita com Serviços: R$ " + String.format("%.2f", totalServicos));
+        System.out.println("Lucro Total Oficina: R$ " + String.format("%.2f", (lucroPecas + totalServicos)));
+        System.out.println("----------------------------------------------");
     }
 }

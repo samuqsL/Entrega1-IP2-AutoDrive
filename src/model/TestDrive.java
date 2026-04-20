@@ -5,6 +5,9 @@ public class TestDrive {
     private Cliente cliente;
     private Veiculo veiculo;
 
+    //Construtor default (sem valores - precisa settar atributos posteriormente!)
+    public TestDrive() {}
+    
     // construtor
     public TestDrive(Cliente cliente, Veiculo veiculo) {
         this.cliente = cliente;

@@ -8,7 +8,7 @@ public class VeiculoSeminovo extends Veiculo {
 	public VeiculoSeminovo(String chassi, String renavam, String modelo, int ano, double preco, double quilometragem) {
 		super(chassi, renavam, modelo, ano, preco, quilometragem);
 		if (quilometragem <= 0) {
-            throw new IllegalArgumentException("Seminovo precisa de quilometragem inicial");
+            throw new IllegalArgumentException("Erro REQ17: Todo Seminovo precisa de quilometragem inicial");
         }
 	}
 }

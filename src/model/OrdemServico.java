@@ -80,6 +80,24 @@ public class OrdemServico {
         }
     }
 
+    public boolean validarItensObrigatorios() {
+    boolean temOleo = false;
+
+    for (Pecas p : listaPecas) {
+        if (p.getNome().equalsIgnoreCase("oleo")) {
+            temOleo = true;
+            break;
+        }
+    }
+
+    if (!temOleo) {
+        System.out.println("Item obrigatório não incluído: Óleo");
+        return false;
+    }
+
+    return true;
+}
+
     // Getters e Setters
     public int getNumero() { return numero; }
     public void setNumero(int numero) { this.numero = numero; }

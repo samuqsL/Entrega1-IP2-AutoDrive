@@ -87,16 +87,25 @@ public class OrdemServico {
             System.out.println("OS precisa estar PAGA.");
             return;
         }
-
+    
         if (!validarItensObrigatorios()) {
             System.out.println("Obrigatório incluir óleo na revisão.");
             return;
         }
-
+    
         this.status = StatusOS.FINALIZADA;
-
+    
         // AJUSTE: Após finalizar e pagar, o veículo volta a ficar disponível
         this.veiculo.setStatus(StatusVeiculo.ESTOQUE);
+    
+        // NOVO AJUSTE: "Liberar" todos os mecânicos que trabalharam nesta OS
+        for (MaoDeObra servico : listaServicos) {
+            if (servico.getMecanico() != null) {
+                servico.getMecanico().setDisponivel(true);
+            }
+        }
+    
+        System.out.println("OS finalizada, veículo e mecânicos liberados!");
     }
 
     // Getters e Setters

@@ -65,8 +65,8 @@ public class OrdemServico {
         this.status = StatusOS.PAGA;
     }
 
-    // ✅ REQ16 - validação simples de item obrigatório (óleo)
-    private boolean validarOleoObrigatorio() {
+    // ✅ REQ16
+    private boolean validarItensObrigatorios() {
         for (Pecas p : listaPecas) {
             if (p.getNome().equalsIgnoreCase("oleo")) {
                 return true;
@@ -81,8 +81,7 @@ public class OrdemServico {
             return;
         }
 
-        // REQ16
-        if (!validarOleoObrigatorio()) {
+        if (!validarItensObrigatorios()) {
             System.out.println("Obrigatório incluir óleo na revisão.");
             return;
         }

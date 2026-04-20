@@ -14,7 +14,7 @@ public class Venda {
   private static final double TAXA_IMPOSTO = 0.10; //Variavel compartilhada por todas as classes (static) | variavel constate fixa (final)
   private static final double ENTRADA_MINIMA = 5000.0; // Variavel constate fixa e compatilhada de ENTRADA MINIMA da VENDA!
 
-  //Construtor vazio (sem valores - precisa settar depois...)
+  //Construtor default (sem valores - precisa settar atributos posteriormente!)
   public Venda() {}
   
   //Construtor 1 [Principal]

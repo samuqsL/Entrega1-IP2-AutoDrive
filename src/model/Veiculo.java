@@ -17,6 +17,9 @@ public class Veiculo {
 	private double preco;
 	private double quilometragem;
 	private StatusVeiculo status;
+
+	//Construtor default (sem valores - precisa settar atributos posteriormente!)
+	public Veiculo() {}
 	
 	//construtores principal
 	public Veiculo(String chassi, String renavam, String modelo, int ano, double preco, double quilometragem ,StatusVeiculo status) {

@@ -20,7 +20,6 @@ public class OrdemServico {
         this.status = StatusOS.ABERTA;
     }
 
-    // Construtor atualizado (REQ06)
     public OrdemServico(int numero, String dataAbertura, Cliente cliente, Veiculo veiculo) {
         this();
         this.numero = numero;
@@ -29,7 +28,6 @@ public class OrdemServico {
         this.veiculo = veiculo;
     }
 
-    // REQ07 – adicionar itens
     public void adicionarPeca(Pecas peca, int quantidade) {
         if (peca.retirarDoEstoque(quantidade)) {
             Pecas item = new Pecas(
@@ -44,12 +42,7 @@ public class OrdemServico {
         }
     }
 
-    //REQ20
     public void adicionarServico(MaoDeObra servico) {
-        if (!servico.getMecanico().isDisponivel()) {
-            System.out.println("Mecânico indisponível.");
-            return;
-        }
         listaServicos.add(servico);
     }
 
@@ -72,31 +65,30 @@ public class OrdemServico {
         this.status = StatusOS.PAGA;
     }
 
-    public void finalizarOS() {
-        if (status == StatusOS.PAGA) {
-            this.status = StatusOS.FINALIZADA;
-        } else {
-            System.out.println("OS precisa estar PAGA.");
+    // ✅ REQ16 - validação simples de item obrigatório (óleo)
+    private boolean validarOleoObrigatorio() {
+        for (Pecas p : listaPecas) {
+            if (p.getNome().equalsIgnoreCase("oleo")) {
+                return true;
+            }
         }
-    }
-
-    public boolean validarItensObrigatorios() {
-    boolean temOleo = false;
-
-    for (Pecas p : listaPecas) {
-        if (p.getNome().equalsIgnoreCase("oleo")) {
-            temOleo = true;
-            break;
-        }
-    }
-
-    if (!temOleo) {
-        System.out.println("Item obrigatório não incluído: Óleo");
         return false;
     }
 
-    return true;
-}
+    public void finalizarOS() {
+        if (status != StatusOS.PAGA) {
+            System.out.println("OS precisa estar PAGA.");
+            return;
+        }
+
+        // REQ16
+        if (!validarOleoObrigatorio()) {
+            System.out.println("Obrigatório incluir óleo na revisão.");
+            return;
+        }
+
+        this.status = StatusOS.FINALIZADA;
+    }
 
     // Getters e Setters
     public int getNumero() { return numero; }

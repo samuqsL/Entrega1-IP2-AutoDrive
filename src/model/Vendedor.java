@@ -5,6 +5,9 @@ public class Vendedor {
   private String nome;
   private double comissao;
   private double percentualComissao;
+
+  //construtor default (sem valores - precisa settar atributos posteriormente!)
+  public Vendedor() {}
   
   //construtor principal da classe!
   public Vendedor(String nome, double percentualComissao){

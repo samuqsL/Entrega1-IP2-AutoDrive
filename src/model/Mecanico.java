@@ -1,3 +1,5 @@
+package model;
+
 public class Mecanico {
     private String nome;
     private Double bonus;

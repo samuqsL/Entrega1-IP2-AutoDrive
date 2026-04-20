@@ -70,6 +70,6 @@ public class Veiculo {
 
 	//Metodos
 	public void reservar() {
-		this.status = statusVeiculo.RESERVADO;
+		this.status = StatusVeiculo.RESERVADO;
 	}
 }

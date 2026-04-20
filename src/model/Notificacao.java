@@ -2,15 +2,13 @@ package model;
 
 public class Notificacao {
     private double quilometragem;
-    private int revisaoNumero;
     private String data;
     private int mesesUso;
     private Cliente cliente;
     private Veiculo veiculo;
 
-    public Notificacao(double quilometragem, int revisaoNumero, String data, int mesesUso, Cliente cliente, Veiculo veiculo) {
+    public Notificacao(double quilometragem, String data, int mesesUso, Cliente cliente, Veiculo veiculo) {
         this.quilometragem = quilometragem;
-        this.revisaoNumero = revisaoNumero;
         this.data = data;
         this.mesesUso = mesesUso;
         this.cliente = cliente;

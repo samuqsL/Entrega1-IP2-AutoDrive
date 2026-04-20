@@ -1,3 +1,5 @@
+package model
+
 public class Pecas {
     private String nome;
     private String codigo;

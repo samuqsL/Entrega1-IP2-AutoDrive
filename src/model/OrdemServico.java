@@ -28,6 +28,11 @@ public class OrdemServico {
         this.dataAbertura = dataAbertura;
         this.cliente = cliente;
         this.veiculo = veiculo;
+        
+        // AJUSTE: Ao abrir a OS, o veículo entra em manutenção
+        if (this.veiculo != null) {
+            this.veiculo.setStatus(StatusVeiculo.EM_MANUTENCAO);
+        }
     }
 
     public void adicionarPeca(Pecas peca, int quantidade) {
@@ -89,6 +94,9 @@ public class OrdemServico {
         }
 
         this.status = StatusOS.FINALIZADA;
+
+        // AJUSTE: Após finalizar e pagar, o veículo volta a ficar disponível
+        this.veiculo.setStatus(StatusVeiculo.ESTOQUE);
     }
 
     // Getters e Setters

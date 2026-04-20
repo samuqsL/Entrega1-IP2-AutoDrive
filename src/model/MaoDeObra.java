@@ -9,13 +9,13 @@ public class MaoDeObra {
     public MaoDeObra() {}
 
     public MaoDeObra(String descricao, double valor, double horas, Mecanico mecanico) {
-        this.descricao = descricao;
-        this.valor = valor;
-        this.horas = horas;
         //AJUSTE(REQ20): checa se mecanico tá ocupado, ou disponivel!
         if (!mecanico.isDisponivel()) {
             throw new IllegalArgumentException("Mecânico ocupado!");
         }
+        this.descricao = descricao;
+        this.valor = valor;
+        this.horas = horas;
         this.mecanico = mecanico;
     }
 

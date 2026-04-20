@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Relatorio() {
+public class Relatorio {
     private ArrayList<Venda> listaVendas;
     private ArrayList<OrdemServico> listaOs;
 

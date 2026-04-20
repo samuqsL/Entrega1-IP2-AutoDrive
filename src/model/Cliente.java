@@ -8,6 +8,9 @@ public class Cliente {
   private String email;
   private String telefone;
 
+  //Construtor default (sem valores - precisa settar atributos posteriormente!)
+  public Cliente() {}
+
   //Construtor 1 (Principal)
   public Cliente (String nome, String cpf, String cnh, String email, String telefone){
     this.nome = nome;

@@ -1,29 +1,48 @@
-public class TelaVenda {
-    private IGerenciadorVenda control; // Interface, não a classe concreta!
+package br.ufrpe.autodrive.gui;
 
-    // A tela recebe o gerenciador pronto para manter os dados consistentes
+import java.util.Scanner;
+import br.ufrpe.autodrive.negocio.IGerenciadorVenda;
+
+public class TelaVenda {
+    private IGerenciadorVenda control; 
+
     public TelaVenda(IGerenciadorVenda gVenda) {
         this.control = gVenda;
     }
 
-    // Método que seria disparado pelo clique de um botão
-    public void executarBotaoVender() {
-        System.out.println("--- TELA DE VENDA ---");
+    //Método exibir() de todas as telas (Ex: com while - pode usar switch também)
+    public void exibir() {
+        Scanner leitor = new Scanner(System.in);
+        int op = -1;
+
+        while (op != 0) {
+            System.out.println("\n--- MÓDULO DE VENDAS ---");
+            System.out.println("1. Realizar Nova Venda");
+            System.out.println("0. Voltar ao Menu");
+            op = leitor.nextInt();
+
+            if (op == 1) {
+                this.BotaoRealizarVenda(); // Método do seu UML
+            }
+        }
+    }
+
+    public void BotaoRealizarVenda() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Iniciando venda...");
         
-        // Simulação: pegando dados que o usuário digitou
-        // (Em um sistema real, viria de campos de texto do Swing/JavaFX)
-        Cliente cli = ...; 
-        Veiculo vei = ...;
-        double valorEntrada = 10000.0;
+        // Simulação de entrada de dados
+        System.out.print("Informe o valor da venda: ");
+        double valor = sc.nextDouble();
 
-        // A TELA SÓ CHAMA O GERENCIADOR
-        boolean ok = control.efetuarVenda(cli, vendedorLogado, vei, valorEntrada);
+        // 1. CHAMA O GERENCIADOR (Lógica) e 2. RECEBE O BOOLEAN
+        boolean sucesso = control.efetuarVenda(valor); 
 
-        // A TELA DECIDE COMO FALAR COM O USUÁRIO
-        if (ok) {
-            System.out.println(">>> Parabéns! Venda registrada no sistema.");
+        // 3. DECIDE A MENSAGEM (Responsabilidade da Tela)
+        if (sucesso) {
+            System.out.println(">>> SUCESSO: Venda concluída com sucesso!");
         } else {
-            System.out.println(">>> ERRO: A venda não pôde ser concluída. Verifique os requisitos.");
+            System.out.println(">>> ERRO: Falha ao realizar venda (Verifique o valor).");
         }
     }
 }

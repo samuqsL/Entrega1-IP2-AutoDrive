@@ -1,5 +1,5 @@
 package br.ufrpe.autodrive.negocio;
 
-public class GerenciadorTestDrive {
+public class GerenciadorTestDrive implements IGerenciadorTestDrive {
 
 }

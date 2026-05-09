@@ -50,32 +50,30 @@ public class Venda {
   public boolean realizarVenda() {
   
       if (!cliente.validarCnhCliente()) {
-          System.out.println("Cliente sem CNH válida");
-          return false; //encerrar metodo antes da hora, para impedir da venda (se CNH DO CLIENTE for INVÁLIDA)
+          return false; //encerrar metodo antes da hora(retorna false), para impedir da venda (se CNH DO CLIENTE for INVÁLIDA)
       }
   
       if (veiculo.getStatus() == StatusVeiculo.VENDIDO) {
-          System.out.println("Veículo já vendido");
-          return false; //encerrar metodo antes da hora, para impedir da venda (se tiver VENDIDO)!
+          return false; //encerrar metodo antes da hora(retorna false), para impedir da venda (se tiver VENDIDO)!
       }
       
       if (veiculo.getStatus() == StatusVeiculo.RESERVADO){
         System.out.println("Veiculo já reservado");
-        return false; //encerrar metodo antes da hora, para impedir da venda (SE tiver RESERVADO)!
+        return false; //encerrar metodo antes da hora(retorna false), para impedir da venda (SE tiver RESERVADO)!
       }
 
       if (veiculo.getStatus() == StatusVeiculo.EM_MANUTENCAO){
         System.out.println("Veiculo em manutenção");
-        return false; //encerrar metodo antes da hora, para impedir da venda (SE tiver EM_MANUTENCAO)!
+        return false; //encerrar metodo antes da hora(retorna false), para impedir da venda (SE tiver EM_MANUTENCAO)!
       }
     
       if (veiculo.getRenavam() == null || veiculo.getRenavam().isEmpty()){
         System.out.println("Veículo com pendência de Documentação!");
-        return false; //encerrar metodo antes da hora, para impedir da venda (SE RENAVAM tiver VAZIO)!
+        return false; //encerrar metodo antes da hora(retorna false), para impedir da venda (SE RENAVAM tiver VAZIO)!
       }
       if (entrada < ENTRADA_MINIMA) {
         System.out.println("Entrada inferior ao mínimo");
-        return false; //encerrar metodo antes da hora, para impedir da venda (SE ENTRADA < ENTRADA MINIMA)
+        return false; //encerrar metodo antes da hora(retorna false), para impedir da venda (SE ENTRADA < ENTRADA MINIMA)
       }
   
       double precoBase = veiculo.getPreco(); // Variavel local do metodo realizarVenda(), o "precoBase" é o preco do veiculo da venda!
@@ -87,12 +85,7 @@ public class Venda {
       this.dataVenda = LocalDateTime.now(); //inicializa o atributo: "dataVenda" da venda = *data atual*
       veiculo.setStatus(StatusVeiculo.VENDIDO); // SE todas as condicões forem atendidas ENTAO veiculo é dado como *VENDIDO*
       
-      vendedor.setComissao(vendedor.getComissao() + comissao); //alterar atributo comissão pro vendedor (PÓS VENDA)!
-    
-      System.out.println("Venda realizada");
-      System.out.println("Imposto: " + imposto);
-      System.out.println("Comissão: " + comissao);
-      
+      vendedor.setComissao(vendedor.getComissao() + comissao); //alterar atributo comissão pro vendedor (PÓS VENDA)! 
     return true;
   }
   

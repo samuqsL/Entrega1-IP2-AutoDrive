@@ -1,5 +1,5 @@
 package br.ufrpe.autodrive.negocio;
 
-public class GerenciadorOficina {
+public class GerenciadorOficina implements IGerenciadorOficina {
 
 }

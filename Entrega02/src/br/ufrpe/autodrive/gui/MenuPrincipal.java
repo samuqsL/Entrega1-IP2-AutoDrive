@@ -1,23 +1,40 @@
 package br.ufrpe.autodrive.gui;
 
-import br.ufrpe.autodrive.negocio.IGerenciadorVenda;
+import br.ufrpe.autodrive.negocio.*; // Importa as Interfaces
 
 public class MenuPrincipal {
-    private IGerenciadorVenda gVenda; // Ele guarda a referência do cérebro do sistema
+    // O Menu guarda os gerenciadores que recebeu do Main
+    private IGerenciadorVenda gVenda;
+    private IGerenciadorOficina gOficina;
+    private IGerenciadorRelatorio gRelatorio;
+    // ... outros gerenciadores
 
-    public MenuPrincipal(IGerenciadorVenda gVenda) {
-        this.gVenda = gVenda;
+    public MenuPrincipal(IGerenciadorVenda gV, IGerenciadorOficina gO, IGerenciadorRelatorio gR) {
+        this.gVenda = gV;
+        this.gOficina = gO;
+        this.gRelatorio = gR;
     }
 
     public void exibirMenu() {
-        // Exemplo:
-        System.out.println("1 - Realizar Venda");
-        // ... lógica de ler opção do usuário ...
-        
-        if (opcao == 1) {
-            // Cria a tela de venda passando o gerenciador que o menu já tem
-            TelaVenda tela = new TelaVenda(this.gVenda);
-            tela.executarBotaoVender();
-        }
+        // Loop com switch/case para o usuário escolher a opção
+        // Se o usuário escolher '1' (Vendas):
+        this.abrirTelaVenda();
+    }
+
+    // Métodos baseados no seu UML (image_81c45f.png)
+    public void abrirTelaVenda() {
+        // Cria a tela e passa o gerenciador específico para ela
+        TelaVenda telaV = new TelaVenda(this.gVenda);
+        telaV.exibir(); // Método na TelaVenda que inicia a interação
+    }
+
+    public void abrirTelaOficina() {
+        TelaOficina telaO = new TelaOficina(this.gOficina);
+        telaO.exibir();
+    }
+
+    public void abrirTelaRelatorio() {
+        TelaRelatorio telaR = new TelaRelatorio(this.gRelatorio);
+        telaR.exibir();
     }
 }

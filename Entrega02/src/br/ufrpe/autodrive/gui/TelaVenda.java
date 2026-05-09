@@ -22,7 +22,7 @@ public class TelaVenda {
             op = leitor.nextInt();
 
             if (op == 1) {
-                this.BotaoRealizarVenda(); // Método do seu UML
+                this.BotaoRealizarVenda(); // chama metodo "BotaoRealizarVenda()"
             }
         }
     }

@@ -68,11 +68,9 @@ public class Venda {
       }
     
       if (veiculo.getRenavam() == null || veiculo.getRenavam().isEmpty()){
-        System.out.println("Veículo com pendência de Documentação!");
         return false; //encerrar metodo antes da hora(retorna false), para impedir da venda (SE RENAVAM tiver VAZIO)!
       }
       if (entrada < ENTRADA_MINIMA) {
-        System.out.println("Entrada inferior ao mínimo");
         return false; //encerrar metodo antes da hora(retorna false), para impedir da venda (SE ENTRADA < ENTRADA MINIMA)
       }
   

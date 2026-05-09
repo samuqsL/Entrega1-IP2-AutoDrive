@@ -1,5 +1,5 @@
 package br.ufrpe.autodrive.negocio;
 
-public class GerenciadorVenda {
+public class GerenciadorVenda implements IGerenciadorVenda {
 
 }

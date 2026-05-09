@@ -47,7 +47,7 @@ public class Venda {
   }
 
  //Metodo 1 (realizar venda de veiculo) - [PRINCIPAL]
-  public void realizarVenda() {
+  public boolean realizarVenda() {
   
       if (!cliente.validarCnhCliente()) {
           System.out.println("Cliente sem CNH válida");

@@ -22,6 +22,32 @@ public class GerenciadorVenda implements IGerenciadorVenda {
         return false;
     }
 
+    @Override
+    public List<Notificacao> listarAlertasRevisao() {
+        List<Notificacao> filtrados = new ArrayList<>();
+        
+        // Supondo que seu repositório tenha um método para listar tudo
+        // repoV é o IRepositorioVendas que você já tem na classe!
+        for (Venda v : repoV.listarTodasVendas()) { 
+            
+            // Criamos a Notificacao com os dados da Venda atual
+            Notificacao n = new Notificacao(
+                v.getVeiculo().getKm(), 
+                0, // revisaoNumero inicial
+                "10/05/2026", 
+                12, // mesesUso (exemplo)
+                v.getCliente(), 
+                v.getVeiculo()
+            );
+    
+            // Se a lógica da Bean disser que precisa, adicionamos na lista
+            if (n.deveGerarAlerta()) {
+                filtrados.add(n);
+            }
+        }
+        return filtrados;
+    }
+
     // ADICIONANDO ESTES PARA BATER COM O REPOSITÓRIO:
 
     @Override

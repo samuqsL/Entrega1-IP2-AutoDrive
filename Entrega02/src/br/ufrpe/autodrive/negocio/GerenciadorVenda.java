@@ -22,7 +22,7 @@ public class GerenciadorVenda implements IGerenciadorVenda {
         return false;
     }
 
-    // ADICIONE ESTES PARA BATER COM O REPOSITÓRIO:
+    // ADICIONANDO ESTES PARA BATER COM O REPOSITÓRIO:
 
     @Override
     public void adicionarVenda(Venda venda) {

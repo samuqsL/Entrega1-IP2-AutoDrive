@@ -59,13 +59,11 @@ public class TelaTestDrive {
         System.out.print("Chassi do Veículo: ");
         String chassi = scanner.nextLine();
     
-        // Passa apenas os identificadores (Strings) para o Gerenciador
-        boolean sucesso = control.agendarTestDrive(cpf, chassi); 
-    
-        if (sucesso) {
-            System.out.println(">>> SUCESSO: Test-Drive agendado e veículo reservado!");
+        // Chama o gerenciador passando apenas o que foi digitado
+        if (this.control.agendarTestDrive(cpf, chassi)) {
+            System.out.println(">>> SUCESSO: Agendamento realizado!");
         } else {
-            System.out.println(">>> ERRO: Falha no agendamento (Verifique CPF, Chassi ou se a CNH é válida).");
+            System.out.println(">>> ERRO: Cliente não encontrado, Chassi inválido ou CNH insuficiente.");
         }
     }
 }

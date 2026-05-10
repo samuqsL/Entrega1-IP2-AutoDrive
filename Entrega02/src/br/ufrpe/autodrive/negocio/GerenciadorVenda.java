@@ -16,15 +16,21 @@ public class GerenciadorVenda implements IGerenciadorVenda {
     }
 
     @Override
-    public boolean efetuarVenda(Cliente c, Vendedor v, Veiculo veic, double entrada) {
-        // 1. O Gerenciador usa o construtor da Venda (Negócio)
-        Venda novaVenda = new Venda(c, v, veic, entrada);
-
-        // 2. Chama o método de negócio da classe Venda
-        if (novaVenda.realizarVenda()) {
-            // 3. Se a lógica de negócio passar, salva no repositório
-            this.repoV.adicionarVenda(novaVenda);
-            return true;
+    public boolean efetuarVenda(String cpfCliente, double entrada) {
+        // 1. Busca o cliente real pelo CPF
+        Cliente c = repoC.procurarCliente(cpfCliente);
+        
+        // 2. Busca um veículo disponível (Simulação, já que não tem repo de Veículo)
+        Veiculo veic = repoV.procurarVeiculoDisponivel(); 
+    
+        if (c != null && veic != null) {
+            Vendedor v = new Vendedor("Samuel", 3000, 0.1); // Vendedor padrão
+            Venda novaVenda = new Venda(c, v, veic, entrada);
+    
+            if (novaVenda.realizarVenda()) {
+                this.repoV.adicionarVenda(novaVenda);
+                return true;
+            }
         }
         return false;
     }

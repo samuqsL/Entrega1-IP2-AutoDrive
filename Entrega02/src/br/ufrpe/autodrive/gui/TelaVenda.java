@@ -18,12 +18,13 @@ public class TelaVenda {
         while (op != 0) {
             System.out.println("\n--- MÓDULO DE VENDAS ---");
             System.out.println("1. Realizar Nova Venda");
+            System.out.println("2. Verificar Necessidade de Reparo (Alertas)"); // OPÇÃO NOVA
             System.out.println("0. Voltar ao Menu");
             op = leitor.nextInt();
 
-            if (op == 1) {
-                this.BotaoRealizarVenda(); // chama metodo "BotaoRealizarVenda()"
-            }
+            if (op == 1) {this.BotaoRealizarVenda();} // chama metodo "BotaoRealizarVenda()"
+            if (op == 2) {this.BotaoVerificarAlertas();} // Chamada para o novo método
+            
         }
     }
 
@@ -43,6 +44,23 @@ public class TelaVenda {
             System.out.println(">>> SUCESSO: Venda concluída com sucesso!");
         } else {
             System.out.println(">>> ERRO: Falha ao realizar venda (Verifique o valor).");
+        }
+    }
+
+    public void BotaoVerificarAlertas() {
+        System.out.println("\n--- BUSCANDO ALERTAS DE REVISÃO NO SISTEMA ---");
+        // A tela pede a lista filtrada para o Gerenciador
+        List<Notificacao> alertas = control.listarAlertasRevisao(); 
+    
+        if (alertas.isEmpty()) {
+            System.out.println("Nenhum veículo precisa de revisão no momento.");
+        } else {
+            for (Notificacao n : alertas) {
+                // A tela decide como exibir os dados da bean Notificacao
+                System.out.println("[ALERTA] Cliente: " + n.getCliente().getNome() + 
+                                   " | Veículo: " + n.getVeiculo().getModelo() + 
+                                   " | KM: " + n.getQuilometragem());
+            }
         }
     }
 }

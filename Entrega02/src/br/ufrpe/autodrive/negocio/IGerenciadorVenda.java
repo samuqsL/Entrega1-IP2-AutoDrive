@@ -13,7 +13,8 @@ public interface IGerenciadorVenda {
     boolean efetuarVenda(Cliente c, Vendedor v, Veiculo veic, double entrada);
     List<Notificacao> listarAlertasRevisao();
 
-    // Você também pode adicionar outros métodos que a TelaVenda vai precisar
-    // void cancelarVenda(String id);
-    // Venda procurarVenda(String cpfCliente);
+    //Métodos que o gerenciador usa do Repositorio!
+    public void adicionarVenda(Venda venda);
+    public void procurarVenda(String cpf);
+    public void removerVenda();
 }

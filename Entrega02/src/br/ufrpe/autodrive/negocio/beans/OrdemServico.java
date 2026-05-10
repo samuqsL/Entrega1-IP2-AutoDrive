@@ -35,7 +35,8 @@ public class OrdemServico {
         }
     }
 
-    public void adicionarPeca(Pecas peca, int quantidade) {
+    // AJUSTE: Passou a retornar boolean em vez de void (e sem System.out.println)
+    public boolean adicionarPeca(Pecas peca, int quantidade) {
         if (peca.retirarDoEstoque(quantidade)) {
             Pecas item = new Pecas(
                 peca.getNome(),
@@ -44,9 +45,9 @@ public class OrdemServico {
                 quantidade
             );
             listaPecas.add(item);
-        } else {
-            System.out.println("Estoque insuficiente para: " + peca.getNome());
+            return true; // Sucesso
         }
+        return false; // Falha: Estoque insuficiente
     }
 
     public void adicionarServico(MaoDeObra servico) {
@@ -82,21 +83,22 @@ public class OrdemServico {
         return false;
     }
 
-    public void finalizarOS() {
+    // AJUSTE: Passou a retornar boolean em vez de void (e sem System.out.println)
+    public boolean finalizarOS() {
         if (status != StatusOS.PAGA) {
-            System.out.println("OS precisa estar PAGA.");
-            return;
+            return false; // OS precisa estar PAGA
         }
     
         if (!validarItensObrigatorios()) {
-            System.out.println("Obrigatório incluir óleo na revisão.");
-            return;
+            return false; // Obrigatório incluir óleo na revisão
         }
     
         this.status = StatusOS.FINALIZADA;
     
         // AJUSTE: Após finalizar e pagar, o veículo volta a ficar disponível
-        this.veiculo.setStatus(StatusVeiculo.ESTOQUE);
+        if (this.veiculo != null) {
+            this.veiculo.setStatus(StatusVeiculo.ESTOQUE);
+        }
     
         // NOVO AJUSTE: "Liberar" todos os mecânicos que trabalharam nesta OS
         for (MaoDeObra servico : listaServicos) {
@@ -105,7 +107,7 @@ public class OrdemServico {
             }
         }
     
-        System.out.println("OS finalizada, veículo e mecânicos liberados!");
+        return true; // Sucesso: OS finalizada, veículo e mecânicos liberados
     }
 
     // Getters e Setters

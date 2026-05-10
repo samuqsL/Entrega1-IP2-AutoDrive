@@ -1,20 +1,21 @@
 package br.ufrpe.autodrive.negocio;
 
-import br.ufrpe.autodrive.negocio.beans.Cliente;
-import br.ufrpe.autodrive.negocio.beans.Vendedor;
-import br.ufrpe.autodrive.negocio.beans.Veiculo;
+// IMPORTS NECESSÁRIOS para reconhecer as Beans e as Listas
+import br.ufrpe.autodrive.negocio.beans.Venda;
+import br.ufrpe.autodrive.negocio.beans.Notificacao;
+import java.util.List;
 
 public interface IGerenciadorVenda {
 
-    /**
-     * Tenta realizar uma venda.
-     * @return true se passar em todas as regras de negócio e for salva, false caso contrário.
-     */
-    boolean efetuarVenda(Cliente c, Vendedor v, Veiculo veic, double entrada);
+    // 1. Recebe String e double da Tela e retorna se deu certo
+    boolean efetuarVenda(String cpfCliente, double entrada);
+
+    // 2. Retorna a lista de notificações para a Tela
     List<Notificacao> listarAlertasRevisao();
 
-    //Métodos que o gerenciador usa do Repositorio!
-    public void adicionarVenda(Venda venda);
-    public void procurarVenda(String cpf);
-    public void removerVenda();
+    // 3. Retorna o objeto Venda completo (precisa do import da bean Venda)
+    Venda procurarVenda(String cpf);
+
+    // 4. Método de remoção simples
+    void removerVenda();
 }

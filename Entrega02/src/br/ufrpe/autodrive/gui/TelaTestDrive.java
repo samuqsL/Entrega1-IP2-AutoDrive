@@ -53,20 +53,19 @@ public class TelaTestDrive {
     }
 
     private void BotaoAgendarTestDrive(Scanner scanner) {
-        System.out.println("\n--- NOVO AGENDAMENTO ---");
-        System.out.print("CPF do Cliente: ");
-        String cpf = scanner.nextLine();
-        System.out.print("Chassi do Veículo: ");
-        String chassi = scanner.nextLine();
-
-        // Aqui você buscaria os objetos reais via Fachada
-        Cliente c = new Cliente(); 
-        Veiculo v = null; 
-
-        if (this.control.agendarTestDrive(c, v)) {
-            System.out.println("SUCESSO: Agendamento realizado!");
-        } else {
-            System.out.println("ERRO: CNH inválida ou veículo indisponível.");
-        }
-    }
+       System.out.println("\n--- NOVO AGENDAMENTO ---");
+       System.out.print("CPF do Cliente: ");
+       String cpf = scanner.nextLine();
+       System.out.print("Chassi do Veículo: ");
+       String chassi = scanner.nextLine();
+   
+       // Passa apenas os identificadores (Strings) para o Gerenciador
+       boolean sucesso = control.agendarTestDrive(cpf, chassi); 
+   
+       if (sucesso) {
+           System.out.println(">>> SUCESSO: Test-Drive agendado e veículo reservado!");
+       } else {
+           System.out.println(">>> ERRO: Falha no agendamento (Verifique CPF, Chassi ou se a CNH é válida).");
+       }
+   }
 }

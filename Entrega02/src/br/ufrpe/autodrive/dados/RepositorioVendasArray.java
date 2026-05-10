@@ -1,70 +1,52 @@
-package br.ufrpe.autodrive.negocio;
+package br.ufrpe.autodrive.dados;
 
-import br.ufrpe.autodrive.dados.IRepositorioVendas;
-import br.ufrpe.autodrive.dados.IRepositorioClientes;
-import br.ufrpe.autodrive.negocio.beans.*;
+import br.ufrpe.autodrive.negocio.beans.Venda;
+import br.ufrpe.autodrive.negocio.beans.Veiculo;
+import br.ufrpe.autodrive.negocio.beans.StatusVeiculo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GerenciadorVenda implements IGerenciadorVenda {
-    private IRepositorioVendas repoV;
-    private IRepositorioClientes repoC;
+public class RepositorioVendasArray implements IRepositorioVendas {
+    private List<Venda> ListaDeVendas;
 
-    public GerenciadorVenda(IRepositorioVendas repoV, IRepositorioClientes repoC) {
-        this.repoV = repoV;
-        this.repoC = repoC;
+    public RepositorioVendasArray() {
+        this.ListaDeVendas = new ArrayList<>();
     }
 
-    @Override
-    public boolean efetuarVenda(Cliente c, Vendedor v, Veiculo veic, double entrada) {
-        // 1. O Gerenciador usa o construtor da Venda (Negócio)
-        Venda novaVenda = new Venda(c, v, veic, entrada);
-
-        // 2. Chama o método de negócio da classe Venda
-        if (novaVenda.realizarVenda()) {
-            // 3. Se a lógica de negócio passar, salva no repositório
-            this.repoV.adicionarVenda(novaVenda);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public List<Notificacao> listarAlertasRevisao() {
-        List<Notificacao> filtrados = new ArrayList<>();
-        List<Venda> todasAsVendas = repoV.listarTodasVendas();
-
-        for (Venda v : todasAsVendas) {
-            // Cria a notificação com os dados da venda salva
-            Notificacao n = new Notificacao(
-                v.getVeiculo().getQuilometragem(),
-                0,
-                v.getDataVenda().toString(),
-                v.calcularMesesUso(),
-                v.getCliente(),
-                v.getVeiculo()
-            );
-
-            if (n.gerarAlerta()) {
-                filtrados.add(n);
-            }
-        }
-        return filtrados;
-    }
-
-    // Métodos de repasse para o Repositório
     @Override
     public void adicionarVenda(Venda venda) {
-        this.repoV.adicionarVenda(venda);
+        if (venda != null) {
+            this.ListaDeVendas.add(venda);
+        }
     }
 
     @Override
-    public void procurarVenda(String cpf) {
-        this.repoV.procurarVenda(cpf);
+    public Venda procurarVenda(String cpf) {
+        for (Venda v : ListaDeVendas) {
+            if (v.getCliente().getCpf().equals(cpf)) {
+                return v;
+            }
+        }
+        return null;
     }
 
     @Override
     public void removerVenda() {
-        this.repoV.removerVenda();
+        if (!ListaDeVendas.isEmpty()) {
+            this.ListaDeVendas.remove(ListaDeVendas.size() - 1);
+        }
+    }
+
+    @Override
+    public List<Venda> listarTodasVendas() {
+        return new ArrayList<>(ListaDeVendas);
+    }
+
+    // Método para ajudar o Gerenciador a achar um carro sem precisar de outro repo
+    @Override
+    public Veiculo procurarVeiculoDisponivel() {
+        // Para testes, você pode retornar um veículo fixo ou 
+        // buscar em uma lista de veículos se você a tiver aqui
+        return null; 
     }
 }

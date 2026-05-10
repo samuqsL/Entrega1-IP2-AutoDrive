@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GerenciadorVenda implements IGerenciadorVenda {
     private IRepositorioVendas repoV;
-    private IRepositorioClientes repoC;
+    private IRepositorioClientes repoC; // Agora ele tem acesso aos clientes também
 
     public GerenciadorVenda(IRepositorioVendas repoV, IRepositorioClientes repoC) {
         this.repoV = repoV;
@@ -17,16 +17,17 @@ public class GerenciadorVenda implements IGerenciadorVenda {
 
     @Override
     public boolean efetuarVenda(String cpfCliente, double entrada) {
-        // 1. Busca o cliente real pelo CPF
         Cliente c = repoC.procurarCliente(cpfCliente);
         
-        // 2. Busca um veículo disponível (Simulação, já que não tem repo de Veículo)
-        Veiculo veic = repoV.procurarVeiculoDisponivel(); 
+        // Se Veiculo for abstrato, você instancia uma classe FILHA:
+        // Supondo que você criou uma classe simples chamada 'Carro' que estende Veiculo
+        Veiculo veic = new Carro("Modelo Teste", "ABC-1234", 100000.0, 0);
+        veic.setStatus(StatusVeiculo.DISPONIVEL);
+        
+        Vendedor v = new Vendedor("Samuel", 3000, 0.1); 
     
-        if (c != null && veic != null) {
-            Vendedor v = new Vendedor("Samuel", 3000, 0.1); // Vendedor padrão
+        if (c != null) {
             Venda novaVenda = new Venda(c, v, veic, entrada);
-    
             if (novaVenda.realizarVenda()) {
                 this.repoV.adicionarVenda(novaVenda);
                 return true;
@@ -34,14 +35,13 @@ public class GerenciadorVenda implements IGerenciadorVenda {
         }
         return false;
     }
-
+    
     @Override
     public List<Notificacao> listarAlertasRevisao() {
         List<Notificacao> filtrados = new ArrayList<>();
-        List<Venda> todasAsVendas = repoV.listarTodasVendas();
+        List<Venda> todasAsVendas = repoV.listarTodasVendas(); // Busca tudo o que foi salvo
 
         for (Venda v : todasAsVendas) {
-            // Cria a notificação com os dados da venda salva
             Notificacao n = new Notificacao(
                 v.getVeiculo().getQuilometragem(),
                 0,
@@ -58,15 +58,10 @@ public class GerenciadorVenda implements IGerenciadorVenda {
         return filtrados;
     }
 
-    // Métodos de repasse para o Repositório
+    // Métodos de repasse (O Gerenciador expõe o que o repositório faz)
     @Override
-    public void adicionarVenda(Venda venda) {
-        this.repoV.adicionarVenda(venda);
-    }
-
-    @Override
-    public void procurarVenda(String cpf) {
-        this.repoV.procurarVenda(cpf);
+    public Venda procurarVenda(String cpf) {
+        return this.repoV.procurarVenda(cpf);
     }
 
     @Override

@@ -1,28 +1,53 @@
 package br.ufrpe.autodrive.negocio.beans;
 
-public class Cliente extends Pessoa { // 1. Herança
-    // 2. APAGUEI nome, cpf e telefone daqui! Deixei só o que é do Cliente.
+public class Cliente extends Pessoa { 
     private String cnh;
     private String email;
 
-    public Cliente() { super(); }
+    // Construtor padrão
+    public Cliente() { 
+        super(); 
+    }
 
+    // Construtor principal
     public Cliente (String nome, String cpf, String cnh, String email, String telefone){
-        // 3. Envia os dados comuns para a classe mãe
         super(nome, cpf, telefone); 
         this.cnh = cnh;
         this.email = email;
     }
 
-    // O overloading continua igual, ele chama o construtor de cima!
+    // Overloading (Sobrecarga)
     public Cliente (String nome, String cpf, String cnh){
         this(nome, cpf, cnh, null, null);
     }
 
-    // os getters e setters de Nome, CPF e Telefone (já estão na Pessoa)
+    // --- Métodos Específicos do Cliente ---
+
+    public String getCnh() { 
+        return cnh; 
+    }
     
-    public String getCnh() { return cnh; }
-    public void setCnh(String cnh) { this.cnh = cnh; }
-  
-    // ... restante dos métodos específicos ...
+    public void setCnh(String cnh) { 
+        this.cnh = cnh; 
+    }
+
+    public String getEmail() { 
+        return email; 
+    }
+
+    public void setEmail(String email) { 
+        this.email = email; 
+    }
+
+    // Métodos de lógica que você já tinha
+    public void atualizarCadastro(String nome, String cnh, String email, String telefone){
+        this.setNome(nome); // Vem da classe Pessoa
+        this.setCnh(cnh);
+        this.setEmail(email);
+        this.setTelefone(telefone); // Vem da classe Pessoa
+    }
+
+    public boolean validarCnhCliente() {
+        return this.cnh != null && !this.cnh.isEmpty();
+    }
 }

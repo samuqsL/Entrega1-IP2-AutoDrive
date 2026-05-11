@@ -33,6 +33,7 @@ public class TelaVenda {
             if (op == 1) this.BotaoRealizarVenda();
             if (op == 2) this.BotaoVerificarAlertas();
         }
+        leitor.close();
     }
 
     public void BotaoRealizarVenda() {
@@ -53,6 +54,7 @@ public class TelaVenda {
         } else {
             System.out.println(">>> ERRO: Falha ao realizar venda (Cliente não encontrado ou dados inválidos).");
         }
+        sc.close();
     }
 
     public void BotaoVerificarAlertas() {

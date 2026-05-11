@@ -18,44 +18,46 @@ public class MenuPrincipal {
     }
 
     public void exibirMenu() {
-    Scanner leitor = new Scanner(System.in); // Para ler a opção
-    int op = -1; 
-
-    // O loop deve continuar enquanto o usuário não escolher "Sair" (ex: 0)
-    while (op != 0) {
-        System.out.println("------------------------------------");
-        System.out.println("-       OPÇÕES DO AUTODRIVE        -");
-        System.out.println("------------------------------------");
-        System.out.println("( 1 ) TELA DE VENDAS");
-        System.out.println("( 2 ) TELA DA OFICINA");
-        System.out.println("( 3 ) TELA DO TESTDRIVE");
-        System.out.println("( 4 ) TELA DE RELATÓRIOS");
-        System.out.println("( 0 ) SAIR");
-        System.out.print("Escolha uma opção: ");
-        
-        op = leitor.nextInt(); // Lê a opção do usuário
-
-        switch(op) {
-            case 1:
-                this.abrirTelaVenda(); // Chama o método que você já criou!
-                // Quando o código chegar aqui, significa que a TelaVenda fechou.
-                System.out.println("\n--- Retornando ao Menu Principal ---");
-                break;
-            case 2:
-                this.abrirTelaOficina();
-                break;
-            case 3:
-                this.abrirTelaTestDrive();
-                break;
-            case 4:
-                this.abrirTelaRelatorio();
-                break;
-            case 0:
-                System.out.println("Saindo do sistema...");
-                break;
-            default:
-                System.out.println("Opção inválida! Tente novamente.");
+        Scanner leitor = new Scanner(System.in); // Para ler a opção
+        int op = -1; 
+    
+        // O loop deve continuar enquanto o usuário não escolher "Sair" (ex: 0)
+        while (op != 0) {
+            System.out.println("------------------------------------");
+            System.out.println("-       OPÇÕES DO AUTODRIVE        -");
+            System.out.println("------------------------------------");
+            System.out.println("( 1 ) TELA DE VENDAS");
+            System.out.println("( 2 ) TELA DA OFICINA");
+            System.out.println("( 3 ) TELA DO TESTDRIVE");
+            System.out.println("( 4 ) TELA DE RELATÓRIOS");
+            System.out.println("( 0 ) SAIR");
+            System.out.print("Escolha uma opção: ");
+            
+            op = leitor.nextInt(); // Lê a opção do usuário
+    
+            switch(op) {
+                case 1:
+                    this.abrirTelaVenda(); // Chama o método que você já criou!
+                    // Quando o código chegar aqui, significa que a TelaVenda fechou.
+                    System.out.println("\n--- Retornando ao Menu Principal ---");
+                    break;
+                case 2:
+                    this.abrirTelaOficina();
+                    break;
+                case 3:
+                    this.abrirTelaTestDrive();
+                    break;
+                case 4:
+                    this.abrirTelaRelatorio();
+                    break;
+                case 0:
+                    System.out.println("Saindo do sistema...");
+                    break;
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+            }
         }
+        leitor.close();
     }
     // Métodos baseados no seu UML (image_81c45f.png)
     public void abrirTelaVenda() {

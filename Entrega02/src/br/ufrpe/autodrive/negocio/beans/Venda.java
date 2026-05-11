@@ -93,4 +93,7 @@ public class Venda {
   public double calcularImposto(double precoBase) {
     return precoBase * TAXA_IMPOSTO;
   }
+  public int calcularMesesUso() {
+    return 0; // Stub temporário para compilar
+  }
 }

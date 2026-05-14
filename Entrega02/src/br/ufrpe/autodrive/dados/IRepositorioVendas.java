@@ -6,6 +6,6 @@ import java.util.List;
 public interface IRepositorioVendas {
     void adicionarVenda(Venda venda);
     Venda procurarVenda(String cpf);
-    void removerVenda(); // Conforme seu diagrama
+    void removerVenda();
     List<Venda> listarTodasVendas();
 }

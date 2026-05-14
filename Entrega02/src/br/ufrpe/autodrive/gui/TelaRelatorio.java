@@ -1,7 +1,9 @@
 package br.ufrpe.autodrive.gui;
 
 import br.ufrpe.autodrive.negocio.IGerenciadorRelatorio;
-import br.ufrpe.autodrive.negocio.beans.*;
+import br.ufrpe.autodrive.negocio.Relatorio; // <-- O import correto agora
+import br.ufrpe.autodrive.negocio.beans.Venda;
+import br.ufrpe.autodrive.negocio.beans.OrdemServico;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,64 +18,71 @@ public class TelaRelatorio {
 
     public void exibir() {
         Scanner leitor = new Scanner(System.in);
-        int op = -1;
-        while (op != 0) {
-            System.out.println("\n--- SISTEMA DE RELATÓRIOS ---");
-            System.out.println("1. Relatório Geral de Vendas");
+        String op = "-1";
+
+        while (!op.equals("0")) {
+            System.out.println("\n--- AUTO DRIVE - RELATÓRIOS ---");
+            System.out.println("1. Vendas Gerais");
             System.out.println("2. Vendas por Vendedor");
             System.out.println("3. Vendas por Período");
-            System.out.println("4. Relatório Geral de Oficina (OS)");
-            System.out.println("5. Relatório de Lucratividade");
+            System.out.println("4. Geral de Oficina (OS)");
+            System.out.println("5. Lucratividade (Peças/Serviços)");
             System.out.println("0. Voltar");
+            System.out.print("Opção: ");
             
-            try {
-                op = Integer.parseInt(leitor.nextLine());
-                switch (op) {
-                    case 1 -> imprimirVendas(control.gerarDadosRelatorio().getListaVendas(), "GERAL");
-                    case 2 -> botaoVendasPorVendedor(leitor);
-                    case 3 -> botaoVendasPorPeriodo(leitor);
-                    case 4 -> imprimirOS(control.gerarDadosRelatorio().getListaOs());
-                    case 5 -> botaoLucratividade();
+            op = leitor.nextLine();
+            
+            switch (op) {
+                case "1" -> {
+                    Relatorio dados = control.gerarDadosRelatorio();
+                    imprimirVendas(dados.getListaVendas(), "GERAL");
                 }
-            } catch (Exception e) { System.out.println("Erro: Entrada inválida."); }
+                case "2" -> {
+                    System.out.print("Nome do Vendedor: ");
+                    String nome = leitor.nextLine();
+                    Relatorio dados = control.gerarDadosRelatorio();
+                    imprimirVendas(dados.filtrarPorVendedor(nome), "VENDEDOR: " + nome);
+                }
+                case "3" -> {
+                    try {
+                        System.out.print("Data Início (dd/mm/aaaa): ");
+                        LocalDate ini = LocalDate.parse(leitor.nextLine(), fmt);
+                        System.out.print("Data Fim (dd/mm/aaaa): ");
+                        LocalDate fim = LocalDate.parse(leitor.nextLine(), fmt);
+                        Relatorio dados = control.gerarDadosRelatorio();
+                        imprimirVendas(dados.filtrarPorPeriodo(ini, fim), "PERÍODO");
+                    } catch (Exception e) { System.out.println("Erro: Data inválida!"); }
+                }
+                case "4" -> {
+                    Relatorio dados = control.gerarDadosRelatorio();
+                    imprimirOS(dados.getListaOs());
+                }
+                case "5" -> {
+                    double[] lucros = control.gerarDadosRelatorio().calcularLucratividade();
+                    System.out.println("\n--- RESUMO FINANCEIRO ---");
+                    System.out.printf("Receita de Peças: R$ %.2f\n", lucros[0]);
+                    System.out.printf("Receita de Serviços: R$ %.2f\n", lucros[1]);
+                    System.out.printf("TOTAL ACUMULADO: R$ %.2f\n", (lucros[0] + lucros[1]));
+                }
+            }
         }
     }
 
-    private void botaoVendasPorVendedor(Scanner leitor) {
-        System.out.print("Nome do Vendedor: ");
-        String nome = leitor.nextLine();
-        List<Venda> vds = control.gerarDadosRelatorio().filtrarPorVendedor(nome);
-        imprimirVendas(vds, "VENDEDOR: " + nome);
-    }
-
-    private void botaoVendasPorPeriodo(Scanner leitor) {
-        System.out.print("Data Início (dd/mm/aaaa): ");
-        LocalDate ini = LocalDate.parse(leitor.nextLine(), fmt);
-        System.out.print("Data Fim (dd/mm/aaaa): ");
-        LocalDate fim = LocalDate.parse(leitor.nextLine(), fmt);
-        List<Venda> vds = control.gerarDadosRelatorio().filtrarPorPeriodo(ini, fim);
-        imprimirVendas(vds, "PERÍODO: " + ini + " a " + fim);
-    }
-
-    private void botaoLucratividade() {
-        double[] lucros = control.gerarDadosRelatorio().calcularLucratividade();
-        System.out.println("\n--- RELATÓRIO DE LUCRATIVIDADE ---");
-        System.out.printf("Receita Peças: R$ %.2f\n", lucros[0]);
-        System.out.printf("Receita Serviços: R$ %.2f\n", lucros[1]);
-        System.out.printf("TOTAL: R$ %.2f\n", (lucros[0] + lucros[1]));
-    }
-
-    private void imprimirVendas(List<Venda> vendas, String titulo) {
+    private void imprimirVendas(List<Venda> lista, String titulo) {
         System.out.println("\n--- RELATÓRIO DE VENDAS (" + titulo + ") ---");
-        for (Venda v : vendas) {
-            System.out.println("Data: " + v.getDataVenda().format(fmt) + " | Valor: R$ " + v.getValorTotal());
+        if (lista.isEmpty()) System.out.println("Nenhum registro encontrado.");
+        for (Venda v : lista) {
+            System.out.println("Nº: " + v.getNumero() + " | Vendedor: " + v.getVendedor().getNome() + 
+                               " | Total: R$ " + v.getValorTotal());
         }
     }
 
     private void imprimirOS(List<OrdemServico> lista) {
-        System.out.println("\n--- RELATÓRIO GERAL DE OFICINA ---");
+        System.out.println("\n--- RELATÓRIO DE OFICINA ---");
+        if (lista.isEmpty()) System.out.println("Nenhuma OS encontrada.");
         for (OrdemServico os : lista) {
-            System.out.println("OS Nº: " + os.getNumero() + " | Status: " + os.getStatus());
+            System.out.println("OS Nº: " + os.getNumero() + " | Cliente: " + os.getCliente().getNome() + 
+                               " | Status: " + os.getStatus());
         }
     }
 }

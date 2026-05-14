@@ -1,10 +1,11 @@
 package br.ufrpe.autodrive.negocio;
 
-import java.util.List;
-import br.ufrpe.autodrive.negocio.beans.Venda;
-import br.ufrpe.autodrive.negocio.beans.OrdemServico;
+import br.ufrpe.autodrive.negocio.beans.Relatorio;
 
 public interface IGerenciadorRelatorio {
-    List<Venda> gerarRelatorioVendas();
-    List<OrdemServico> gerarRelatorioOS();
+    /**
+     * Captura os dados dos repositórios de Vendas e OS 
+     * e os encapsula em um objeto Relatorio para processamento.
+     */
+    Relatorio gerarDadosRelatorio();
 }

@@ -137,4 +137,20 @@ public class OrdemServico {
 
     public List<MaoDeObra> getListaServicos() { return listaServicos; }
     public void setListaServicos(List<MaoDeObra> listaServicos) { this.listaServicos = listaServicos; }
+    
+    public double getValorPecas() {
+        double total = 0;
+        for (Pecas p : listaPecas) {
+            total += p.custoPecas();
+        }
+        return total;
+    }
+
+    public double getValorMaoDeObra() {
+        double total = 0;
+        for (MaoDeObra m : listaServicos) {
+            total += m.calcularCusto();
+        }
+        return total;
+    }
 }

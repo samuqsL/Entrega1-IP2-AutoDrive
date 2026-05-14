@@ -26,7 +26,7 @@ public class RepositorioVeiculosArray implements IRepositorioVeiculos {
 
     @Override
     public List<Veiculo> listarTodos() {
-        return this.estoque;
+        return new ArrayList<Veiculo>(this.estoque);
     }
 
     @Override

@@ -14,58 +14,63 @@ public class TelaVenda {
 
     public void exibir() {
         Scanner leitor = new Scanner(System.in);
-        int op = -1;
+        String op = "-1"; // Usar String no menu evita o bug do buffer do Scanner
 
-        while (op != 0) {
+        while (!op.equals("0")) {
             System.out.println("\n--- TELA DE VENDAS ---");
             System.out.println("1. Realizar Nova Venda");
             System.out.println("2. Verificar Necessidade de Reparo (Alertas)");
             System.out.println("0. Voltar ao Menu");
+            System.out.print("Escolha uma opção: ");
             
-            // Tratamento simples para evitar erro se não for número
-            if (leitor.hasNextInt()) {
-                op = leitor.nextInt();
+            op = leitor.nextLine(); // Lemos como linha inteira para não sobrar "Enter" no buffer
+
+            if (op.equals("1")) this.botaoRealizarVenda(leitor);
+            if (op.equals("2")) this.botaoVerificarAlertas();
+        }
+    }
+
+    // Ajustado nome para bater com a chamada do menu e recebendo o leitor
+    private void botaoRealizarVenda(Scanner leitor) {
+        System.out.println("\n--- EFETUAR NOVA VENDA ---");
+
+        try {
+            System.out.print("Digite o número da venda: ");
+            int numero = Integer.parseInt(leitor.nextLine());
+
+            System.out.print("CPF do Cliente: ");
+            String cpfCliente = leitor.nextLine();
+
+            System.out.print("Chassi do Veículo: ");
+            String chassi = leitor.nextLine();
+
+            System.out.print("Nome do Vendedor: ");
+            String nomeVendedor = leitor.nextLine();
+
+            System.out.print("Valor de Entrada: R$ ");
+            double entrada = Double.parseDouble(leitor.nextLine());
+
+            boolean sucesso = control.efetuarVenda(numero, cpfCliente, chassi, nomeVendedor, entrada);
+
+            if (sucesso) {
+                System.out.println("\n✅ SUCESSO: Venda registrada!");
             } else {
-                leitor.next(); // limpa a entrada inválida
-                continue;
+                System.out.println("\n❌ ERRO: Dados inválidos ou veículo indisponível.");
             }
 
-            if (op == 1) this.BotaoRealizarVenda();
-            if (op == 2) this.BotaoVerificarAlertas();
+        } catch (NumberFormatException e) {
+            System.out.println("\n⚠️ ERRO: Use apenas números em 'Número' e 'Entrada'.");
         }
-        leitor.close();
     }
-
-    public void BotaoRealizarVenda() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\n--- INICIANDO VENDA ---");
     
-        System.out.print("CPF do Cliente: ");
-        String cpfCliente = sc.nextLine();
-    
-        System.out.print("Valor da Entrada: ");
-        double entrada = sc.nextDouble();
-    
-        // O controlador faz a ponte com o repositório de clientes
-        boolean sucesso = control.efetuarVenda(cpfCliente, entrada); 
-    
-        if (sucesso) {
-            System.out.println(">>> SUCESSO: Venda concluída com sucesso!");
-        } else {
-            System.out.println(">>> ERRO: Falha ao realizar venda (Cliente não encontrado ou dados inválidos).");
-        }
-        sc.close();
-    }
-
-    public void BotaoVerificarAlertas() {
-        System.out.println("\n--- BUSCANDO ALERTAS DE REVISÃO NO SISTEMA ---");
+    private void botaoVerificarAlertas() {
+        System.out.println("\n--- BUSCANDO ALERTAS DE REVISÃO ---");
         List<Notificacao> alertas = control.listarAlertasRevisao(); 
     
-        if (alertas.isEmpty()) {
+        if (alertas == null || alertas.isEmpty()) {
             System.out.println("Nenhum veículo precisa de revisão no momento.");
         } else {
             for (Notificacao n : alertas) {
-                // A tela formata a saída para o usuário
                 System.out.println("[ALERTA] Cliente: " + n.getCliente().getNome() + 
                                    " | Veículo: " + n.getVeiculo().getModelo() + 
                                    " | KM: " + n.getQuilometragem());

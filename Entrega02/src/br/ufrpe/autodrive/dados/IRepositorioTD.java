@@ -7,4 +7,5 @@ public interface IRepositorioTD {
     void adicionarTestDrive(TestDrive td);
     List<TestDrive> listarTestDrives();
     TestDrive procurarTestDrive(String chassi);
+    void removerTestDrive(String chassi);
 }

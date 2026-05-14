@@ -31,4 +31,9 @@ public class RepositorioClientesArray implements IRepositorioClientes {
     public void removerCliente(Cliente cliente) {
         this.ListaDeClientes.remove(cliente);
     }
+
+    @Override
+    public List<Cliente> listarClientes() {
+        return new ArrayList<>(this.ListaDeClientes);
+    }
 }

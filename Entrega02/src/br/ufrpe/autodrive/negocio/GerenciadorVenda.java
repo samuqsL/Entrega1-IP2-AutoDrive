@@ -37,8 +37,6 @@ public class GerenciadorVenda implements IGerenciadorVenda {
                 
                 // O realizarVenda() processa comissão e data
                 if (novaVenda.realizarVenda()) {
-                    // Regra de negócio: muda status no estoque e salva a venda
-                    veic.setStatus(StatusVeiculo.VENDIDO);
                     this.repoV.adicionarVenda(novaVenda);
                     return true;
                 }

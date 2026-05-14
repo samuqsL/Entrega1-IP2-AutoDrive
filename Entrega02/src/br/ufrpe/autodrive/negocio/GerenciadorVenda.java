@@ -1,45 +1,59 @@
 package br.ufrpe.autodrive.negocio;
 
-import br.ufrpe.autodrive.dados.IRepositorioVendas;
-import br.ufrpe.autodrive.dados.IRepositorioClientes;
+import br.ufrpe.autodrive.dados.*;
 import br.ufrpe.autodrive.negocio.beans.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GerenciadorVenda implements IGerenciadorVenda {
+    // --- 1. ATRIBUTOS (Agora com todos os repositórios necessários) ---
     private IRepositorioVendas repoV;
     private IRepositorioClientes repoC;
+    private IRepositorioVendedores repoVend;
+    private IRepositorioVeiculos repoVeic;
 
-    public GerenciadorVenda(IRepositorioVendas repoV, IRepositorioClientes repoC) {
+    // --- 2. CONSTRUTOR (Recebendo as novas dependências) ---
+    public GerenciadorVenda(IRepositorioVendas repoV, IRepositorioClientes repoC, 
+                            IRepositorioVendedores repoVend, IRepositorioVeiculos repoVeic) {
         this.repoV = repoV;
         this.repoC = repoC;
+        this.repoVend = repoVend;
+        this.repoVeic = repoVeic;
     }
 
+    // --- 3. EFETUAR VENDA (Agora 100% dinâmico) ---
     @Override
-    public boolean efetuarVenda(String cpfCliente, double entrada) {
+    public boolean efetuarVenda(String cpfCliente, String chassi, String nomeVendedor, double entrada) {
+        // Busca os objetos reais nos repositórios em vez de instanciar fixo
         Cliente c = repoC.procurarCliente(cpfCliente);
-        
-        // 1. Instanciação correta (VeiculoNovo)
-        Veiculo veic = new VeiculoNovo("CHASSI123", "PLACA-001", "Modelo Teste", 2024, 100000.0);
-        veic.setStatus(StatusVeiculo.DISPONIVEL);
-        
-        // 2. Vendedor com apenas 2 parâmetros (Nome e % Comissão)
-        Vendedor v = new Vendedor("Samuel", 0.1); 
+        Vendedor v = repoVend.procurarVendedor(nomeVendedor);
+        Veiculo veic = repoVeic.procurarVeiculo(chassi);
 
-        if (c != null) {
-            Venda novaVenda = new Venda(c, v, veic, entrada);
-            if (novaVenda.realizarVenda()) {
-                this.repoV.adicionarVenda(novaVenda);
-                return true;
+        // Validação: Todos os envolvidos precisam existir e o carro deve estar disponível
+        if (c != null && v != null && veic != null) {
+            if (veic.getStatus() == StatusVeiculo.DISPONIVEL) {
+                
+                Venda novaVenda = new Venda(c, v, veic, entrada);
+                
+                // O realizarVenda() processa comissão e data
+                if (novaVenda.realizarVenda()) {
+                    // Regra de negócio: muda status no estoque e salva a venda
+                    veic.setStatus(StatusVeiculo.VENDIDO);
+                    this.repoV.adicionarVenda(novaVenda);
+                    return true;
+                }
             }
         }
         return false;
     }
     
+    // --- OS DEMAIS PERMANECEM IGUAIS (Apenas verifique os nomes dos métodos no repoV) ---
+    
     @Override
     public List<Notificacao> listarAlertasRevisao() {
         List<Notificacao> filtrados = new ArrayList<>();
-        List<Venda> todasAsVendas = repoV.listarTodasVendas(); // Busca tudo o que foi salvo
+        // Verifique se no seu IRepositorioVendas o nome é listarTodasVendas() ou listarVendas()
+        List<Venda> todasAsVendas = repoV.listarTodasVendas(); 
 
         for (Venda v : todasAsVendas) {
             Notificacao n = new Notificacao(
@@ -58,7 +72,6 @@ public class GerenciadorVenda implements IGerenciadorVenda {
         return filtrados;
     }
 
-    // Métodos de repasse (O Gerenciador expõe o que o repositório faz)
     @Override
     public Venda procurarVenda(String cpf) {
         return this.repoV.procurarVenda(cpf);

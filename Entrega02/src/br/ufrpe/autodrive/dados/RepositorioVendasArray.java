@@ -1,8 +1,6 @@
 package br.ufrpe.autodrive.dados;
 
 import br.ufrpe.autodrive.negocio.beans.Venda;
-import br.ufrpe.autodrive.negocio.beans.Veiculo;
-import br.ufrpe.autodrive.negocio.beans.StatusVeiculo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,26 +19,19 @@ public class RepositorioVendasArray implements IRepositorioVendas {
     }
 
     @Override
-    public Venda procurarVenda(String cpf) {
+    public Venda procurarVenda(int numero) {
         for (Venda v : ListaDeVendas) {
-            if (v.getCliente().getCpf().equals(cpf)) {
+            // Correção: Tipos primitivos (int) comparam com ==
+            if (v.getNumero() == numero) {
                 return v;
             }
         }
         return null;
     }
 
-   // No RepositorioVendasArray
     @Override
     public void removerVenda(int numero) {
-        Venda alvo = null;
-        for (Venda v : ListaDeVendas) {
-            // Supondo que adicionou getNumero() em Venda
-            if (v.getNumero() == numero) { 
-                alvo = v;
-                break;
-            }
-        }
+        Venda alvo = procurarVenda(numero); // Usa o método de busca acima
         if (alvo != null) {
             this.ListaDeVendas.remove(alvo);
         }

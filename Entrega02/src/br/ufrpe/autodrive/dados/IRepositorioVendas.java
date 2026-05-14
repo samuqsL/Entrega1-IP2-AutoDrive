@@ -4,8 +4,8 @@ import br.ufrpe.autodrive.negocio.beans.Venda;
 import java.util.List;
 
 public interface IRepositorioVendas {
-    void adicionarVenda(Venda venda);
-    Venda procurarVenda(String cpf);
-    void removerVenda(int numero);
+    void salvar(Venda v);
     List<Venda> listarTodasVendas();
+    Venda buscarPorNumero(int numero);
+    void removerVenda(int numero);    
 }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
   
 public class Venda {
   //Atributos
+  private int numero;
   private Cliente cliente;
   private Vendedor vendedor;
   private Veiculo veiculo;
@@ -18,8 +19,9 @@ public class Venda {
   public Venda() {}
   
   //Construtor 1 [Principal]
-  public Venda (Cliente cliente, Vendedor vendedor, Veiculo veiculo, double entrada){
+  public Venda (int numero, Cliente cliente, Vendedor vendedor, Veiculo veiculo, double entrada){
     //valor total não é inicializado no construtor!
+    this.numero = numero;
     this.cliente = cliente;
     this.vendedor = vendedor;
     this.veiculo = veiculo;
@@ -27,6 +29,7 @@ public class Venda {
   }
   
   //getters (pegar valor)
+  public int getNumero() { return this.numero; }
   public Cliente getCliente() {return this.cliente;}
   public Vendedor getVendedor() {return this.vendedor;}
   public Veiculo getVeiculo() {return this.veiculo;}
@@ -34,6 +37,7 @@ public class Venda {
   public LocalDateTime getDataVenda() {return this.dataVenda;}
   public double getEntrada() {return this.entrada;}
   //setters (alterar valor / validações)
+  public void setNumero(int numero) { this.numero = numero; }
   public void setCliente(Cliente cliente) {this.cliente = cliente;}
   public void setVendedor(Vendedor vendedor) {this.vendedor = vendedor;}
   public void setVeiculo(Veiculo veiculo) {this.veiculo = veiculo;}
